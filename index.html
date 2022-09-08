@@ -45,23 +45,39 @@ var minNum2 = 1; /* 10 mean 2 digits */
 var formula;
 var formulaOper = "+";
 
-function assignAns(calAns, correctOption, optionIdx) {
+var ansMap = new Map();
 
+
+function assignAns(calAns, correctOption, optionIdx) {
 
 	if (correctOption == optionIdx) {
 		$("#ans"+optionIdx).text(calAns);
 		correctOptionId = "ans"+optionIdx;
+		
+		ansMap.set(calAns, optionIdx);
 	}
 	else {
-		var wrongAns = "";
-		if (calAns.toString().indexOf("...") == -1) {
-			wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
-		}
-		else {
-			wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
+		var isDuplicatedAns = true;
+		
+		while (isDuplicatedAns) {
+			var wrongAns = "";
+			if (calAns.toString().indexOf("...") == -1) {
+				wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
+				
+			}
+			else {
+				wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
+
+			}
+			$("#ans"+optionIdx).text(wrongAns);
+
+			if (!ansMap.has(wrongAns)) {
+				isDuplicatedAns = false;
+				ansMap.set(wrongAns, optionIdx);
+			}
+//			else {alert("dup");}
 
 		}
-		$("#ans"+optionIdx).text(wrongAns);			
 	}
 }
 
@@ -108,6 +124,8 @@ function refreshQuestion(voc) {
 	$("#vocab_question").html(formula);
 	
 	var correctOption = Math.floor(Math.random() * 4);
+	
+	ansMap = new Map();
 	
 	for (var i=0; i<4; i++) {
 		assignAns(calculatedAns, correctOption, i);
@@ -223,12 +241,16 @@ $(function() {
 <p id="vocab_question" style="font-size:100px;">gfsdgd</p>	
 	<table>
 		<tr>
-			<td><span id="ans0" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans0">&#9734;</button></td>
-			<td><span id="ans1" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans1">&#9734;</button></td>
+			<td><span id="ans0" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;" value="ans0">SELECT</button></td>
 		</tr>
 		<tr>
-			<td><span id="ans2" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans2">&#9734;</button></td>
-			<td><span id="ans3" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans3">&#9734;</button></td>
+			<td><span id="ans1" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;"  value="ans1">SELECT</button></td>
+		</tr>
+		<tr>
+			<td><span id="ans2" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;"  value="ans2">SELECT</button></td>
+		</tr>
+		<tr>
+			<td><span id="ans3" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;"  value="ans3">SELECT</button></td>
 		</tr>
 	</table>
 <p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
