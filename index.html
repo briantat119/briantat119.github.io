@@ -180,8 +180,9 @@ $(function() {
 
 			// document.querySelector(".progress-bar").style.width = correctCount + "%";
 
-			$('#correctModalId').modal('show');
-
+			setTimeout(function() {
+				$('#correctModalId').modal('show');
+			}, 2000);
 
 
 
@@ -205,7 +206,9 @@ $(function() {
 				totalScore -= 2;
 
 			}	
-			$('#incorrectModalId').modal('show');
+			setTimeout(function() {
+				$('#incorrectModalId').modal('show');
+			}, 2000);
 
 			setTimeout(function() {
 				$('#incorrectModalId').modal('hide');
