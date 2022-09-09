@@ -1,27 +1,35 @@
 <html>
 <head>
-<style>
-body {
-	background-color: none; 
-	font-size:10px;
-	margin: 50px;
-}
-h1   {color: blue;}
-p    {color: blue;}
-td	{
-	color: green;
-	font-size:50px;
-	line-height:60px;
-	border-style: solid;
-	width: 350px;
-	background-color: white;
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>	
+	<style>
+	body {
+		background-color: none; 
+		font-size:10px;
+		margin: 50px;
+	}
+	h1   {color: blue;}
+	p    {color: blue;}
+	td	{
+		color: green;
+		font-size:50px;
+		line-height:60px;
+		border-style: solid;
+		width: 350px;
+		background-color: white;
 
-}
+	}
 
-table {
+	table {
 
-}
-</style>
+	}
+
+	.ans_btn_class {
+		width:100%;
+		font-size: 30px;
+		margin: 20px;
+	}
+	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
@@ -157,14 +165,14 @@ $(function() {
 	$(".ans_btn_class").on('click', function() {
 		$(this).attr('disabled', true);
 
-//		alert($(this).val());
+		// alert($(this).val());
 		if ($(this).val() == correctOptionId) {
 //			alert("correct");
 			correctCount++;
 			$("#correct_count").text(correctCount);
 			$("#correct_list").append("|"+formula);
-//			setTimeout(function(){ refreshQuestion("fsadfd"); }, 1500);
-			refreshQuestion("fsadfd");
+			setTimeout(function(){ refreshQuestion("fsadfd"); }, 2000);
+//			refreshQuestion("fsadfd");
 		}
 		else {
 //			alert("wrong");
@@ -201,8 +209,6 @@ $(function() {
 			
 
 		}, 500);
-		
-
 
 	});
 	
@@ -253,24 +259,50 @@ $(function() {
         <select id="voice"></select>
     </label>
 </p-->
+	<section id="questionSectionId">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<p id="vocab_question" style="font-size:100px;">gfsdgd</p>
+			
+				</div>	
+				<div class="col-md-4">
+					<p id="scoreId" style="font-size:100px;">100/100</p>
+			
+				</div>	
+	
+			</div>
 
+		</div>
+	</section>
 
+	<section id="answerSectionId">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans0" class="ans_class ans_btn_class btn btn-primary" value="ans0">Primary</button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans1" class="ans_class ans_btn_class btn btn-primary" value="ans1">Primary</button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans2" class="ans_class ans_btn_class btn btn-primary" value="ans2">Primary</button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans3" class="ans_class ans_btn_class btn btn-primary" value="ans3">Primary</button>
+				</div>	
+			</div>
 
-<p id="vocab_question" style="font-size:100px;">gfsdgd</p>	
-	<table>
-		<tr>
-			<td><span id="ans0" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;" value="ans0">SELECT</button></td>
-		</tr>
-		<tr>
-			<td><span id="ans1" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;"  value="ans1">SELECT</button></td>
-		</tr>
-		<tr>
-			<td><span id="ans2" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;"  value="ans2">SELECT</button></td>
-		</tr>
-		<tr>
-			<td><span id="ans3" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" style="font-size:50px;"  value="ans3">SELECT</button></td>
-		</tr>
-	</table>
+		</div>
+
+	</section>
+
 <p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
 <p id="correct_list" style="font-size:15px"></p>
 <p style="font-size:30px">Incorrect:</p><p id="incorrect_count" style="font-size:30px"></p>
