@@ -167,6 +167,8 @@ $(function() {
 		$(this).attr('disabled', true);
 
 		// alert($(this).val());
+		var selectedAnsTxt =$(this).text();
+		speakWord(selectedAnsTxt);
 		if ($(this).val() == correctOptionId) {
 //			alert("correct");
 			correctCount++;
@@ -180,7 +182,12 @@ $(function() {
 
 			$('#correctModalId').modal('show');
 
+
+
+
 			setTimeout(function() {
+//				alert(selectedAnsTxt);
+//				speakWord(selectedAnsTxt);
 				refreshQuestion("fsadfd");
 				$('#correctModalId').modal('hide');
 			}, 3000);
@@ -220,10 +227,25 @@ $(function() {
 
 	});
 	
-	$(".ans_class").on("click", function () {
+	// $(".ans_class").on("click", function () {
 	
-		console.log($(this).text());
-		speech.text = $(this).text();            
+	// 	console.log($(this).text());
+	// 	speech.text = $(this).text();            
+		
+	// 	speech.lang = "en-US";
+	// 	window.speechSynthesis.speak(speech);
+
+	// 	setTimeout(function(){ 
+	// 		speech.lang = "zh-CN";
+	// 		window.speechSynthesis.speak(speech);
+	// 	}, 500);
+
+	// });
+	
+	function speakWord(btnTxt) {
+	
+		console.log("speak"+$(this).text());
+		speech.text = btnTxt;            
 		
 		speech.lang = "en-US";
 		window.speechSynthesis.speak(speech);
@@ -231,12 +253,10 @@ $(function() {
 		setTimeout(function(){ 
 			speech.lang = "zh-CN";
 			window.speechSynthesis.speak(speech);
-			
-
 		}, 500);
 
-	});
-	
+	};
+
 	
 	$(".formulatSetting").on("change", function () {
 
