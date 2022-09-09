@@ -38,6 +38,7 @@ var vocabMeaning = ["放棄", "能力", "能夠", "流產", "關於", "以上", 
 
 var correctOptionId, calAns;
 var questionCount=0, correctCount=0, incorrectCount=0;
+var totalScore=0;
 
 var speech = new SpeechSynthesisUtterance();
 
@@ -169,9 +170,22 @@ $(function() {
 		if ($(this).val() == correctOptionId) {
 //			alert("correct");
 			correctCount++;
+			totalScore += 4;
 			$("#correct_count").text(correctCount);
 			$("#correct_list").append("|"+formula);
-			setTimeout(function(){ refreshQuestion("fsadfd"); }, 2000);
+
+			// document.querySelector(".progress-bar").style.width = correctCount + "%";
+
+			// document.querySelector(".progress-bar").style.width = correctCount + "%";
+
+			$('#correctModalId').modal('show');
+
+			setTimeout(function() {
+				refreshQuestion("fsadfd");
+				$('#correctModalId').modal('hide');
+			}, 3000);
+
+			// setTimeout(function(){  }, 2000);
 //			refreshQuestion("fsadfd");
 		}
 		else {
@@ -180,7 +194,18 @@ $(function() {
 			$("#incorrect_count").text(incorrectCount);			
 			$("#incorrect_list").append("|"+formula);
 
+			if (totalScore >=2) {
+				totalScore -= 2;
+
+			}	
+			$('#incorrectModalId').modal('show');
+
+			setTimeout(function() {
+				$('#incorrectModalId').modal('hide');
+			}, 1500);
 		}
+		$("#scoreBarId").width(totalScore+ "%");
+		$("#scoreBarId").text(totalScore);
 		$(this).attr('disabled', false);
 
 		 // do stuff		 
@@ -262,15 +287,17 @@ $(function() {
 	<section id="questionSectionId">
 		<div class="container">
 			<div class="row">
+				<div class="col-md-12" style="height:50px;">
+					<div class="progress">
+						<div id="scoreBarId" class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+					</div>		
+				</div>		
+			</div>
+			<div class="row">
 				<div class="col-md-8">
 					<p id="vocab_question" style="font-size:100px;">gfsdgd</p>
 			
 				</div>	
-				<div class="col-md-4">
-					<p id="scoreId" style="font-size:100px;">100/100</p>
-			
-				</div>	
-	
 			</div>
 
 		</div>
@@ -302,6 +329,33 @@ $(function() {
 		</div>
 
 	</section>
+
+
+	<div class="modal fade" id="correctModalId">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title">Correct</h4>
+			</div>
+			<div class="modal-body">
+			  <p>Score +4 !</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="modal fade" id="incorrectModalId">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title">Correct</h4>
+			</div>
+			<div class="modal-body">
+			  <p>Score -2 !</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
 
 <p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
 <p id="correct_list" style="font-size:15px"></p>
