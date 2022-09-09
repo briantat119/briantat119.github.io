@@ -91,6 +91,16 @@ function refreshQuestion(voc) {
 
 	var secondNum = Math.floor((Math.random() * minNum2 * 9) + minNum2);
 	
+	if (formulaOper==="/") {
+		// Avoid divide by zero
+		secondNum++;
+
+		// Avoid first num > second num	
+		if (secondNum > firstNum) {
+			secondNum = firstNum - 1;
+		}
+	}
+	
 	formula = firstNum + " " + formulaOper + " " + secondNum +" = ?";
 	
 	
@@ -112,7 +122,15 @@ function refreshQuestion(voc) {
 
 		 case "/":
 		 	formula = firstNum + " " + "&divide;" + " " + secondNum +" = ?";
-			calculatedAns = (firstNum-(firstNum % secondNum))/secondNum +"..."+ firstNum % secondNum;
+			
+			var remainder = firstNum % secondNum;
+			
+			if (remainder!=0) {
+				calculatedAns = (firstNum-(firstNum % secondNum))/secondNum +"..."+ firstNum % secondNum;
+			}
+			else {
+				calculatedAns = (firstNum-(firstNum % secondNum))/secondNum;
+			}
 			break;			
 		 default:
 			calculatedAns = 0;
@@ -182,7 +200,7 @@ $(function() {
 			window.speechSynthesis.speak(speech);
 			
 
-		}, 200);
+		}, 500);
 		
 
 
