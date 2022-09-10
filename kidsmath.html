@@ -69,8 +69,8 @@ const formulaOperMap = new Map([
 
 async function speakWord(btnTxt) {
 	Promise.allSettled([
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 2000)),
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 0)),
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 2000)),
 		new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 5000)),
 		new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 5000))
 		])
