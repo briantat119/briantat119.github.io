@@ -211,10 +211,13 @@ $(function() {
 			if (totalScore > 100) {
 				totalScore = 100;
 
-				var luckyDrawId = Math.floor(Math.random() * 2);
+				var luckyDrawId = Math.floor(Math.random() * 3);
 				$("#luckyDrawBadge"+luckyDrawId).show();
 
 				$('#luckyDrawModalId').modal('show');
+			}
+			else {
+				$('#correctModalId').modal('show');
 			}
 
 			$("#correct_count").text(correctCount);
@@ -225,7 +228,7 @@ $(function() {
 			// document.querySelector(".progress-bar").style.width = correctCount + "%";
 
 //			setTimeout(function() {
-				$('#correctModalId').modal('show');
+
 				speakWord(selectedAnsTxt); 
 //			}, 2000);
 
@@ -441,11 +444,20 @@ $(function() {
 					<img src="img/cheaplab.webp" class="card-img" alt="...">
 					<div class="card-img-overlay">
 					<h5 class="card-title">Cheap Lab</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Cheap Lab stamp and you will be eligible to redeem a trip to Cheap Lab once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Cheap Lab stamp and you will be eligible to redeem a trip to Cheap Lab once you have collected 50 stamps.</p>
 					<p class="card-text" style="color:white;">Reference Number: REF</p>
 					</div>
 				</div>
 
+				<!-- Monopoly-->
+				<div class="card text-bg-dark" id="luckyDrawBadge2" style="display:none;">
+					<img src="img/monopoly.webp" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Cheap Lab</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
