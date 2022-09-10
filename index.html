@@ -60,6 +60,16 @@ var formulaOper = "+";
 var ansMap = new Map();
 
 
+async function speakWord(btnTxt, lang) {
+	
+	console.log("speak"+$(this).text());
+	speech.text = btnTxt;            
+	
+	speech.lang = lang;
+	await window.speechSynthesis.speak(speech);
+
+};
+
 function assignAns(calAns, correctOption, optionIdx) {
 
 	if (correctOption == optionIdx) {
@@ -172,7 +182,8 @@ $(function() {
 		// alert($(this).val());
 		var selectedAnsTxt =$(this).text();
 
-		speakWord(selectedAnsTxt); 
+		speakWord(selectedAnsTxt, "en-US"); 
+		speakWord(selectedAnsTxt, "zh-CN"); 
 
 
 		if ($(this).val() == correctOptionId) {
@@ -251,26 +262,8 @@ $(function() {
 
 	// });
 	
-	function speakWord(btnTxt) {
-	
-		console.log("speak"+$(this).text());
-		speech.text = btnTxt;            
-		
-		speech.lang = "en-US";
-		window.speechSynthesis.speak(speech);
 
-		speakWordInMandarin(btnTxt);
 
-	};
-
-	function speakWordInMandarin(btnTxt) {
-	
-		speech.text = btnTxt;            
-		
-		speech.lang = "zh-CN";
-		window.speechSynthesis.speak(speech);
-
-	};
 	
 	$(".formulatSetting").on("change", function () {
 
