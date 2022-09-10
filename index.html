@@ -211,7 +211,7 @@ $(function() {
 			if (totalScore > 100) {
 				totalScore = 100;
 
-				var luckyDrawId = Math.floor(Math.random() * 3);
+				var luckyDrawId = Math.floor(Math.random() * 4);
 				$("#luckyDrawBadge"+luckyDrawId).show();
 
 				$('#luckyDrawModalId').modal('show');
@@ -453,8 +453,18 @@ $(function() {
 				<div class="card text-bg-dark" id="luckyDrawBadge2" style="display:none;">
 					<img src="img/monopoly.webp" class="card-img" alt="...">
 					<div class="card-img-overlay">
-					<h5 class="card-title">Cheap Lab</h5>
+					<h5 class="card-title">Monopoly</h5>
 					<p class="card-text" style="color:white;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
+				
+				<!-- Rummikub-->
+				<div class="card text-bg-dark" id="luckyDrawBadge3" style="display:none;">
+					<img src="img/rum.png" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Rummikub</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Rummikub stamp and you will be eligible to redeem a chance to play Rummikub once you have collected 100 stamps.</p>
 					<p class="card-text" style="color:white;">Reference Number: REF</p>
 					</div>
 				</div>
