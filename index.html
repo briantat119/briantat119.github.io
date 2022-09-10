@@ -68,7 +68,7 @@ Promise.allSettled([
 ])
 .then((values) => console.log(values));
 
-async function speakWord(btnTxt) {
+function speakWord(btnTxt) {
 	Promise.allSettled([
 		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 1500)),
 		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 3000))
@@ -80,12 +80,12 @@ async function speakWord(btnTxt) {
 
 function speakWordWithLang(btnTxt, lang) {
 	
-	console.log("speak"+btnTxt);
+	alert("speak"+btnTxt);
 	speech.text = btnTxt;            
 	
 	speech.lang = lang;
 
-	console.log("speech.lang"+speech.lang);
+	alert("speech.lang"+speech.lang);
 	window.speechSynthesis.speak(speech);
 
 };
