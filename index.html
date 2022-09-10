@@ -172,8 +172,7 @@ $(function() {
 		// alert($(this).val());
 		var selectedAnsTxt =$(this).text();
 
-		speakWord(selectedAnsTxt, "en-US"); 
-		speakWord(selectedAnsTxt, "zh-CN"); 
+		speakWord(selectedAnsTxt); 
 
 
 		if ($(this).val() == correctOptionId) {
@@ -252,18 +251,26 @@ $(function() {
 
 	// });
 	
-	function speakWord(btnTxt, lang) {
+	function speakWord(btnTxt) {
 	
 		console.log("speak"+$(this).text());
 		speech.text = btnTxt;            
 		
-		speech.lang = lang;
+		speech.lang = "en-US";
 		window.speechSynthesis.speak(speech);
 
-
+		speakWordInMandarin(btnTxt);
 
 	};
 
+	function speakWordInMandarin(btnTxt) {
+	
+		speech.text = btnTxt;            
+		
+		speech.lang = "zh-CN";
+		window.speechSynthesis.speak(speech);
+
+	};
 	
 	$(".formulatSetting").on("change", function () {
 
