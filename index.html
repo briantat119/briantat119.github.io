@@ -194,7 +194,7 @@ $(function() {
 		// alert($(this).val());
 		var selectedAnsTxt =$(this).text();
 
-		speakWord(selectedAnsTxt); 
+		
 
 
 		if ($(this).val() == correctOptionId) {
@@ -216,9 +216,10 @@ $(function() {
 
 			// document.querySelector(".progress-bar").style.width = correctCount + "%";
 
-			setTimeout(function() {
+//			setTimeout(function() {
 				$('#correctModalId').modal('show');
-			}, 2000);
+				speakWord(selectedAnsTxt); 
+//			}, 2000);
 
 
 
@@ -242,9 +243,10 @@ $(function() {
 				totalScore -= 2;
 
 			}	
-			setTimeout(function() {
+
 				$('#incorrectModalId').modal('show');
-			}, 2000);
+				speakWord(selectedAnsTxt); 
+
 
 			setTimeout(function() {
 				$('#incorrectModalId').modal('hide');
