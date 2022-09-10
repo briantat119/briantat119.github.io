@@ -252,7 +252,7 @@ $(function() {
 //			$("#incorrect_list").append("|"+formula);
 			appendListItem("incorrectListId", formula, selectedAnsTxt); 
 
-			
+
 			if (totalScore >=2) {
 				totalScore -= 2;
 
@@ -364,14 +364,14 @@ function appendListItem(listId, itemTitle, itemContent) {
 			<div class="row">
 				<div class="col-md-12" style="height:50px;">
 					<div class="progress" style="height: 60px; font-size: 20px; margin-top:0px;">
-						<div id="scoreBarId" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+						<div id="scoreBarId" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
 					</div>		
 				</div>		
 			</div>
 
 			<div class="row">
 				<div class="col-md-12" style="height:30px;">
-					<span class="badge text-bg-success" id="luckyDrawBadge" style="font-size:15px;">Score</span>
+					<span class="badge text-bg-danger" id="luckyDrawBadge" style="font-size:15px;">Score</span>
 				</div>		
 			</div>
 
