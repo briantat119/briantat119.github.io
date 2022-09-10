@@ -60,12 +60,17 @@ var formulaOper = "+";
 var ansMap = new Map();
 
 
-function speakWord(btnTxt) {
+async function speakWord(btnTxt) {
 	Promise.allSettled([
 		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 1500))
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 2000)),
+		new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 5000)),
+		new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 5000))
 		])
-		.then();
+		.then(function(value) {
+
+		});
+
 
 
 }
@@ -227,7 +232,7 @@ $(function() {
 //				alert(selectedAnsTxt);
 //				speakWord(selectedAnsTxt);
 				refreshQuestion("fsadfd");
-				$('#correctModalId').modal('hide');
+//				$('#correctModalId').modal('hide');
 			}, 5000);
 
 			// setTimeout(function(){  }, 2000);
@@ -248,9 +253,9 @@ $(function() {
 				speakWord(selectedAnsTxt); 
 
 
-			setTimeout(function() {
-				$('#incorrectModalId').modal('hide');
-			}, 5000);
+			// setTimeout(function() {
+			// 	$('#incorrectModalId').modal('hide');
+			// }, 10000);
 		}
 		$("#scoreBarId").width(totalScore+ "%");
 		$("#scoreBarId").text(totalScore);
@@ -391,7 +396,7 @@ $(function() {
 	</section>
 
 
-	<div class="modal fade" id="correctModalId">
+	<div class="modal fade correctModalClass" id="correctModalId">
 		<div class="modal-dialog modal-dialog-centered">
 		  <div class="modal-content">
 			<div class="modal-header">
@@ -404,7 +409,7 @@ $(function() {
 		</div>
 	  </div>
 
-	  <div class="modal fade" id="incorrectModalId">
+	  <div class="modal fade correctModalClass" id="incorrectModalId">
 		<div class="modal-dialog modal-dialog-centered">
 		  <div class="modal-content">
 			<div class="modal-header">
