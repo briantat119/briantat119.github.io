@@ -194,6 +194,7 @@ function refreshQuestion(voc) {
 
 $(function() {
 	$(".ans_btn_class").on('click', function() {
+
 		$(this).attr('disabled', true);
 
 		// alert($(this).val());
@@ -211,7 +212,9 @@ $(function() {
 				totalScore = 100;
 
 				var luckyDrawId = Math.floor(Math.random() * 6);
-				$("#luckyDrawBadge"+luckyDrawId).show();
+				$("#luckyDrawBadge"+0).show();
+
+				$('#luckyDrawModalId').modal('show');
 			}
 
 			$("#correct_count").text(correctCount);
@@ -339,17 +342,18 @@ $(function() {
 </p-->
 	<section id="questionSectionId">
 		<div class="container">
+
 			<div class="row">
 				<div class="col-md-12" style="height:50px;">
-					<div class="progress" style="height: 60px; font-size: 20px;">
+					<div class="progress" style="height: 60px; font-size: 20px; margin-top:0px;">
 						<div id="scoreBarId" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
 					</div>		
 				</div>		
 			</div>
 
 			<div class="row">
-				<div class="col-md-12" style="height:20px;">
-					<span class="badge text-bg-primary" id="luckyDrawBadge0" style="display:none;">Disneyland</span>
+				<div class="col-md-12" style="height:30px;">
+					<span class="badge text-bg-success" id="luckyDrawBadge" style="font-size:15px;">Score</span>
 					<span class="badge text-bg-secondary" id="luckyDrawBadge1" style="display:none;">Board Games</span>
 					<span class="badge text-bg-success" id="luckyDrawBadge2" style="display:none;">Hot Pot</span>
 					<span class="badge text-bg-danger" id="luckyDrawBadge3" style="display:none;">Toys</span>
@@ -424,7 +428,22 @@ $(function() {
 
 
 	<section id="luckyDrawSectionId">
+		<div class="modal fade correctModalClass" id="luckyDrawModalId">
+			<div class="modal-dialog modal-dialog-centered">
+			  <div class="modal-content">
 
+		<div class="card text-bg-dark" id="luckyDrawBadge0">
+			<img src="img/disney.webp" class="card-img" alt="...">
+			<div class="card-img-overlay">
+			  <h5 class="card-title">Disneyland</h5>
+			  <p class="card-text" style="color:white;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps.</p>
+			  <p class="card-text" style="color:white;">Reference Number: REF</p>
+			</div>
+		  </div>
+
+		</div>
+	</div>
+  </div>
 	</section>
 <p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
 <p id="correct_list" style="font-size:15px"></p>
