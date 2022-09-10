@@ -200,7 +200,15 @@ $(function() {
 		if ($(this).val() == correctOptionId) {
 //			alert("correct");
 			correctCount++;
-			totalScore += 4;
+			totalScore += 40;
+			
+			if (totalScore > 100) {
+				totalScore = 100;
+
+				var luckyDrawId = Math.floor(Math.random() * 6);
+				$("#luckyDrawBadge"+luckyDrawId).show();
+			}
+
 			$("#correct_count").text(correctCount);
 			$("#correct_list").append("|"+formula);
 
@@ -331,6 +339,18 @@ $(function() {
 					</div>		
 				</div>		
 			</div>
+
+			<div class="row">
+				<div class="col-md-12" style="height:20px;">
+					<span class="badge text-bg-primary" id="luckyDrawBadge0" style="display:none;">Disneyland</span>
+					<span class="badge text-bg-secondary" id="luckyDrawBadge1" style="display:none;">Board Games</span>
+					<span class="badge text-bg-success" id="luckyDrawBadge2" style="display:none;">Hot Pot</span>
+					<span class="badge text-bg-danger" id="luckyDrawBadge3" style="display:none;">Toys</span>
+					<span class="badge text-bg-warning" id="luckyDrawBadge4" style="display:none;">Cheap Lab</span>
+					<span class="badge text-bg-info" id="luckyDrawBadge5" style="display:none;">Sticker</span>	
+				</div>		
+			</div>
+
 			<div class="row">
 				<div class="col-md-12" style="margin-top:30px">
 					<p id="vocab_question" style="font-size:50px;">gfsdgd</p>
@@ -396,29 +416,9 @@ $(function() {
 	  </div>
 
 
-	<!-- <section id="luckyDrawSectionId">
-		<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-			<div class="carousel-inner">
-			  <div class="carousel-item active" data-bs-interval="10000">
-				<img src="..." class="d-block w-100" alt="...">
-			  </div>
-			  <div class="carousel-item" data-bs-interval="2000">
-				<img src="..." class="d-block w-100" alt="...">
-			  </div>
-			  <div class="carousel-item">
-				<img src="..." class="d-block w-100" alt="...">
-			  </div>
-			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			  <span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			  <span class="visually-hidden">Next</span>
-			</button>
-		  </div>
-	</section> -->
+	<section id="luckyDrawSectionId">
+
+	</section>
 <p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
 <p id="correct_list" style="font-size:15px"></p>
 <p style="font-size:30px">Incorrect:</p><p id="incorrect_count" style="font-size:30px"></p>
