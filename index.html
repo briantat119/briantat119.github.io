@@ -35,534 +35,167 @@
 	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-var vocab = ["abandon", "ability", "able", "abortion", "about", "above", "abroad", "absence", "absolute", "absolutely", "absorb", "abuse", "academic", "accept", "access", "accident", "accompany", "accomplish", "according", "account", "accurate", "accuse", "achieve", "achievement", "acid", "acknowledge", "acquire", "across", "act", "action", "active", "activist", "activity", "actor", "actress", "actual", "actually", "ad", "adapt", "add", "addition", "additional", "address", "adequate", "adjust", "adjustment", "administration", "administrator", "admire", "admission", "admit", "adolescent", "adopt", "adult", "advance", "advanced", "advantage", "adventure", "advertising", "advice", "advise", "adviser", "advocate", "affair", "affect", "afford", "afraid", "African", "African-American", "after", "afternoon", "again", "against", "age", "agency", "agenda", "agent", "aggressive", "ago", "agree", "agreement", "agricultural", "ah", "ahead", "aid", "aide", "AIDS", "aim", "air", "aircraft", "airline", "airport", "album", "alcohol", "alive", "all", "alliance", "allow", "ally", "almost", "alone", "along", "already", "also", "alter", "alternative", "although", "always", "AM", "amazing", "American", "among", "amount", "analysis", "analyst", "analyze", "ancient", "and", "anger", "angle", "angry", "animal", "anniversary", "announce", "annual", "another", "answer", "anticipate", "anxiety", "any", "anybody", "anymore", "anyone", "anything", "anyway", "anywhere", "apart", "apartment", "apparent", "apparently", "appeal", "appear", "appearance", "apple", "application", "apply", "appoint", "appointment", "appreciate", "approach", "appropriate", "approval", "approve", "approximately", "Arab", "architect", "area", "argue", "argument", "arise", "arm", "armed", "army", "around", "arrange", "arrangement", "arrest", "arrival", "arrive", "art", "article", "artist", "artistic", "as", "Asian", "aside", "ask", "asleep", "aspect", "assault", "assert", "assess", "assessment", "asset", "assign", "assignment", "assist", "assistance", "assistant", "associate", "association", "assume", "assumption", "assure", "at", "athlete", "athletic", "atmosphere", "attach", "attack", "attempt", "attend", "attention", "attitude", "attorney", "attract", "attractive", "attribute", "audience", "author", "authority", "auto", "available", "average", "avoid", "award", "aware", "awareness", "away", "awful"];;
-var vocabMeaning = ["放棄", "能力", "能夠", "流產", "關於", "以上", "國外", "缺席", "絕對", "絕對", "吸收", "濫用", "學術的", "接受", "訪問", "事故", "陪", "完成", "根據", "帳戶", "準確", "控告", "實現", "成就", "酸", "確認", "獲得", "跨越", "法案", "行動", "活性", "活動家", "活動", "演員", "演員", "實際", "其實", "廣告", "適應", "加", "加成", "額外", "地址", "充足", "調整", "調整", "行政", "管理員", "欣賞", "入場", "承認", "青少年", "採用", "成人", "提前", "高級", "優點", "冒險", "廣告", "忠告", "勸告", "顧問", "主張", "事務", "影響", "買得起", "害怕", "非洲人", "非裔美國人", "後", "下午", "再次", "反對", "年齡", "機構", "議程", "代理人", "好鬥的", "前", "同意", "協議", "農業的", "啊", "先", "援助", "助手", "艾滋病", "目標", "空氣", "飛機", "航空公司", "飛機場", "專輯", "醇", "活", "所有", "聯盟", "允許", "盟國", "幾乎", "單獨", "沿", "已經", "也", "改變", "另類", "雖然", "總是", "上午", "驚人", "美國人", "其中", "量", "分析", "分析員", "分析", "古", "和", "憤怒", "角度", "憤怒", "動物", "週年", "宣布", "年度", "另一個", "回答", "預料", "焦慮", "任何", "任何人", "不再", "任何人", "任何東西", "無論如何", "任何地方", "分開", "公寓", "明顯的", "顯然地", "上訴", "出現", "出現", "蘋果", "應用", "應用", "委", "約定", "欣賞", "方法", "適當", "認可", "批准", "約", "阿拉伯", "建築師", "區", "爭論", "論據", "出現", "臂", "武裝的", "軍隊", "周圍", "安排", "安排", "逮捕", "到達", "到達", "藝術", "文章", "藝術家", "藝術的", "如", "亞洲人", "在旁邊", "問", "睡著了", "方面", "突擊", "斷言", "評估", "評定", "資產", "分配", "分配", "助攻", "幫助", "助理", "關聯", "協會", "承擔", "假設", "保證", "在", "運動員", "運動的", "大氣層", "連接", "攻擊", "嘗試", "出席", "注意", "態度", "律師", "吸引", "有魅力", "屬性", "聽眾", "作者", "權威", "汽車", "有空", "平均", "避免", "獎", "知道的", "意識", "遠", "可怕"];
 
-var correctOptionId, calAns;
-var questionCount=0, correctCount=0, incorrectCount=0;
-var totalScore=0;
-
-var speech = new SpeechSynthesisUtterance();
-
-		speech.volume = 1;
-		speech.rate = 1;
-		speech.pitch = 1;                
-
-
-var voices = speechSynthesis.getVoices();
-
-var minNum1 = 10; /* 10 mean 2 digits */
-var minNum2 = 1; /* 10 mean 2 digits */
-var formula;
-var formulaOper = "+";
-
-var ansMap = new Map();
-
-
-async function speakWord(btnTxt) {
-	Promise.allSettled([
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 2000)),
-		new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 5000)),
-		new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 5000))
-		])
-		.then(function(value) {
-
-		});
-
-
-
-}
-
-function speakWordWithLang(btnTxt, lang) {
-	
-	console.log("speak"+btnTxt);
-	speech.text = btnTxt;            
-	
-	speech.lang = lang;
-
-	console.log("speech.lang"+speech.lang);
-	window.speechSynthesis.speak(speech);
-
-};
-
-function assignAns(calAns, correctOption, optionIdx) {
-
-	if (correctOption == optionIdx) {
-		$("#ans"+optionIdx).text(calAns);
-		correctOptionId = "ans"+optionIdx;
-		
-		ansMap.set(calAns, optionIdx);
-	}
-	else {
-		var isDuplicatedAns = true;
-		
-		while (isDuplicatedAns) {
-			var wrongAns = "";
-			if (calAns.toString().indexOf("...") == -1) {
-				wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
-				
-			}
-			else {
-				wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
-
-			}
-			$("#ans"+optionIdx).text(wrongAns);
-
-			if (!ansMap.has(wrongAns)) {
-				isDuplicatedAns = false;
-				ansMap.set(wrongAns, optionIdx);
-			}
-//			else {alert("dup");}
-
-		}
-	}
-}
-
-function refreshQuestion(voc) {
-	questionCount++;
-//s	alert(questionCount);
-//, correctCount, incorrectCount
-	calAns = Math.floor(Math.random() * vocab.length);
-
-	var firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
-
-	var secondNum = Math.floor((Math.random() * minNum2 * 9) + minNum2);
-	
-	if (formulaOper==="/") {
-		// Avoid divide by zero
-		secondNum++;
-
-		// Avoid first num > second num	
-		if (secondNum > firstNum) {
-			secondNum = firstNum - 1;
-		}
-	}
-	
-	formula = firstNum + " " + formulaOper + " " + secondNum +" = ?";
-	
-	
-	var calculatedAns;
-
-	switch(formulaOper) {
-		 case "-":
-			calculatedAns = firstNum - secondNum;
-			break;
-		 case "+":
-			calculatedAns = firstNum + secondNum;
-			break;
-			
-		 case "*":
-		 case "x":
-		 case "X":		 
-			calculatedAns = firstNum * secondNum;
-			break;
-
-		 case "/":
-		 	formula = firstNum + " " + "&divide;" + " " + secondNum +" = ?";
-			
-			var remainder = firstNum % secondNum;
-			
-			if (remainder!=0) {
-				calculatedAns = (firstNum-(firstNum % secondNum))/secondNum +"..."+ firstNum % secondNum;
-			}
-			else {
-				calculatedAns = (firstNum-(firstNum % secondNum))/secondNum;
-			}
-			break;			
-		 default:
-			calculatedAns = 0;
-	} 
-
-//	formula += calculatedAns;
-
-
-	$("#vocab_question").html(formula);
-	
-	var correctOption = Math.floor(Math.random() * 4);
-	
-	ansMap = new Map();
-	
-	for (var i=0; i<4; i++) {
-		assignAns(calculatedAns, correctOption, i);
-	}
-	
-//  alert(voc);
-  return;
-}
-
-$(function() {
-	$(".ans_btn_class").on('click', function() {
-
-		$(this).attr('disabled', true);
-
-		// alert($(this).val());
-		var selectedAnsTxt =$(this).text();
-
-		
-
-
-		if ($(this).val() == correctOptionId) {
-//			alert("correct");
-			correctCount++;
-			totalScore += 40;
-			appendListItem("correctListId", formula, selectedAnsTxt); 
-
-			if (totalScore > 100) {
-				totalScore = 100;
-
-				var luckyDrawId = Math.floor(Math.random() * 4);
-				$("#luckyDrawBadge"+luckyDrawId).show();
-
-				$('#luckyDrawModalId').modal('show');
-			}
-			else {
-				$('#correctModalId').modal('show');
-			}
-
-			$("#correct_count").text(correctCount);
-			// $("#correct_list").append("|"+formula);
-
-			// document.querySelector(".progress-bar").style.width = correctCount + "%";
-
-			// document.querySelector(".progress-bar").style.width = correctCount + "%";
-
-//			setTimeout(function() {
-
-				speakWord(selectedAnsTxt); 
-//			}, 2000);
-
-
-
-			setTimeout(function() {
-//				alert(selectedAnsTxt);
-//				speakWord(selectedAnsTxt);
-				refreshQuestion("fsadfd");
-//				$('#correctModalId').modal('hide');
-			}, 5000);
-
-			// setTimeout(function(){  }, 2000);
-//			refreshQuestion("fsadfd");
-		}
-		else {
-//			alert("wrong");
-			incorrectCount++;
-			$("#incorrect_count").text(incorrectCount);			
-//			$("#incorrect_list").append("|"+formula);
-			appendListItem("incorrectListId", formula, selectedAnsTxt); 
-
-
-			if (totalScore >=2) {
-				totalScore -= 2;
-
-			}	
-
-				$('#incorrectModalId').modal('show');
-				speakWord(selectedAnsTxt); 
-
-
-			// setTimeout(function() {
-			// 	$('#incorrectModalId').modal('hide');
-			// }, 10000);
-		}
-		$("#scoreBarId").width(totalScore+ "%");
-		$("#scoreBarId").text(totalScore);
-		$(this).attr('disabled', false);
-
-		 // do stuff		 
-	});
-	
-	
-	$("#vocab_question").on("click", function () {
-		console.log($(this).text());
-		speech.text = $(this).text();            
-		speech.lang = "en-US";
-		window.speechSynthesis.speak(speech);
-
-	});
-	
-	// $(".ans_class").on("click", function () {
-	
-	// 	console.log($(this).text());
-	// 	speech.text = $(this).text();            
-		
-	// 	speech.lang = "en-US";
-	// 	window.speechSynthesis.speak(speech);
-
-	// 	setTimeout(function(){ 
-	// 		speech.lang = "zh-CN";
-	// 		window.speechSynthesis.speak(speech);
-	// 	}, 500);
-
-	// });
-	
-
-
-	
-	$(".formulatSetting").on("change", function () {
-
-		minNum1 = $("#setMinNumId1").val(); /* 10 mean 2 digits */
-		minNum2 = $("#setMinNumId2").val(); /* 10 mean 2 digits */
-		
-		formulaOper = $("#setOperId").val(); /* 10 mean 2 digits */
-		refreshQuestion('yes');
-	});
-/*
-	$("select").on("change", function () {
-		message.voice = voices[$(this).val()];
-	});
-
-	$("button").on("click", function () {
-		speechSynthesis.speak(message);
-	});	
-	
-	// Hack around voices bug
-	var interval = setInterval(function () {
-		voices = speechSynthesis.getVoices();
-		if (voices.length) clearInterval(interval); else return;
-
-		for (var i = 0; i < voices.length; i++) {
-			if (i==21) {
-				$("select").append("<option selected value=\"" + i + "\">" + voices[i].name + "</option>");
-			}
-			else {
-				$("select").append("<option value=\"" + i + "\">" + voices[i].name + "</option>");
-			}
-		}
-	}, 10);
-*/	
-	
-});
-
-
-function appendListItem(listId, itemTitle, itemContent) {
-	var itemHtml = '<li class="list-group-item d-flex justify-content-between align-items-start">'+
-						'<div class="ms-2 me-auto">'+
-							'<div class="fw-bold">'+itemTitle+'</div>'+
-							itemContent+
-						'</div>'+
-					'</li>';
-	
-	$("#"+listId).append(itemHtml);
-
-}
-
-//document.getElementById("demo").innerHTML = myFunction(4, 3);
-</script>
 
 </head>
-<body onload="refreshQuestion('yes');">
+<body>
 <!--p>
     <label>Voice
         <select id="voice"></select>
     </label>
 </p-->
-	<section id="questionSectionId">
+	<section id="lessonSectionId">
 		<div class="container">
 
 			<div class="row">
-				<div class="col-md-12" style="height:50px;">
-					<div class="progress" style="height: 60px; font-size: 20px; margin-top:0px;">
-						<div id="scoreBarId" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
-					</div>		
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Addition</h5>
+						  <p class="card-text">_ _ + _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=1&oper=add" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>			
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Addition</h5>
+						  <p class="card-text">_ _  + _ _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=10&oper=add" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
 				</div>		
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Addition</h5>
+						  <p class="card-text">_ _ _ + _ _</p>
+						  <a href="./kidsmath.html?minNum1=100&minNum2=10&oper=add" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>	
 			</div>
 
+
 			<div class="row">
-				<div class="col-md-12" style="height:30px;">
-					<span class="badge text-bg-danger" id="luckyDrawBadge" style="font-size:15px;">Score</span>
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Deduction</h5>
+						  <p class="card-text">_ _ - _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=1&oper=minus" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>			
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Deduction</h5>
+						  <p class="card-text">_ _  - _ _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=10&oper=minus" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
 				</div>		
-			</div>
 
-			<div class="row">
-				<div class="col-md-12" style="margin-top:30px">
-					<p id="vocab_question" style="font-size:50px;">gfsdgd</p>			
-				</div>	
-			</div>
-
-		</div>
-	</section>
-
-	<section id="answerSectionId">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<button type="button" id="ans0" class="ans_class ans_btn_class btn btn-primary" value="ans0">Primary</button>
-				</div>	
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<button type="button" id="ans1" class="ans_class ans_btn_class btn btn-primary" value="ans1">Primary</button>
-				</div>	
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<button type="button" id="ans2" class="ans_class ans_btn_class btn btn-primary" value="ans2">Primary</button>
-				</div>	
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<button type="button" id="ans3" class="ans_class ans_btn_class btn btn-primary" value="ans3">Primary</button>
-				</div>	
-			</div>
-
-		</div>
-
-	</section>
-
-
-	<div class="modal fade correctModalClass" id="correctModalId">
-		<div class="modal-dialog modal-dialog-centered">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h4 class="modal-title">Correct</h4>
-			</div>
-			<div class="modal-body">
-			  <p>Score +4 !</p>
-			</div>
-		  </div>
-		</div>
-	  </div>
-
-	  <div class="modal fade correctModalClass" id="incorrectModalId">
-		<div class="modal-dialog modal-dialog-centered">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h4 class="modal-title">Incorrect</h4>
-			</div>
-			<div class="modal-body">
-			  <p>Score -2 !</p>
-			</div>
-		  </div>
-		</div>
-	  </div>
-
-
-	<section id="luckyDrawSectionId">
-		<div class="modal fade correctModalClass" id="luckyDrawModalId">
-			<div class="modal-dialog modal-fullscreen-sm-down">
-			  <div class="modal-content">
-
-				<!-- Disneyland-->
-				<div class="card text-bg-dark" id="luckyDrawBadge0" style="display:none;">
-					<img src="img/disney.webp" class="card-img" alt="...">
-					<div class="card-img-overlay">
-					<h5 class="card-title">Disneyland</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
-					</div>
-				</div>
-
-				<!-- Cheaplab-->
-				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
-					<img src="img/cheaplab.webp" class="card-img" alt="...">
-					<div class="card-img-overlay">
-					<h5 class="card-title">Cheap Lab</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Cheap Lab stamp and you will be eligible to redeem a trip to Cheap Lab once you have collected 50 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
-					</div>
-				</div>
-
-				<!-- Monopoly-->
-				<div class="card text-bg-dark" id="luckyDrawBadge2" style="display:none;">
-					<img src="img/monopoly.webp" class="card-img" alt="...">
-					<div class="card-img-overlay">
-					<h5 class="card-title">Monopoly</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
-					</div>
-				</div>
-				
-				<!-- Rummikub-->
-				<div class="card text-bg-dark" id="luckyDrawBadge3" style="display:none;">
-					<img src="img/rum.png" class="card-img" alt="...">
-					<div class="card-img-overlay">
-					<h5 class="card-title">Rummikub</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Rummikub stamp and you will be eligible to redeem a chance to play Rummikub once you have collected 100 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</section>
-
-
-	<section id="scoreDetailSectionId">
-		<div class="container">
-
-			<div class="row">
-				<div class="col-md-12">
-
-
-
-					<div class="accordion" id="scoreDetailAccordionId">
-						<div class="accordion-item">
-						<h2 class="accordion-header" id="headingOne">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-							Correct  
-							<span id="correct_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-success"></span>
-							</button>
-						</h2>
-						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								
-								<ol id="correctListId" class="list-group list-group-numbered">
-									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
-									  <div class="ms-2 me-auto">
-										<div class="fw-bold">Subheading</div>
-										Content for list item
-									  </div>
-									</li> -->
-
-								</ol>
-							
-							</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Deduction</h5>
+						  <p class="card-text">_ _ _ - _ _</p>
+						  <a href="./kidsmath.html?minNum1=100&minNum2=10&oper=minus" class="btn btn-primary">Go</a>
 						</div>
-						</div>
-						<div class="accordion-item">
-						<h2 class="accordion-header" id="headingTwo">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								Incorrect List
-								<span id="incorrect_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger"></span>
-							</button>
-						</h2>
-						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								<ol id="incorrectListId" class="list-group list-group-numbered">
-									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
-									  <div class="ms-2 me-auto">
-										<div class="fw-bold">Subheading</div>
-										Content for list item
-									  </div>
-									</li> -->
-
-								</ol>							
-							</div>
-						</div>
-						</div>
-					</div>
-		
-		
-				</div>
+					  </div>
+				</div>	
 			</div>
-		</div>
 
-	</section>
-
-
-	<section id="settingSectionId">
-		<div class="container">
 
 			<div class="row">
-				<div class="col-md-12" style="height:50px;">
-	 Minimum for 1st number: <input id="setMinNumId1" class="formulatSetting" type="text" name="settingMinNum1" value="10"/>  
-	 Minimum for 2nd number:  <input id="setMinNumId2" class="formulatSetting" type="text" name="settingMinNum2" value="1"/>
-	 Operator:  <input id="setOperId" class="formulatSetting" type="text" name="settingOper" value="+"/>
-				</div>
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Multiply</h5>
+						  <p class="card-text">_ _ x _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=1&oper=multiply" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>			
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Multiply</h5>
+						  <p class="card-text">_ _  x _ _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=10&oper=multiply" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>		
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Multiply</h5>
+						  <p class="card-text">_ _ _ X _ _</p>
+						  <a href="./kidsmath.html?minNum1=100&minNum2=10&oper=multiply" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>	
 			</div>
+
+
+
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Division</h5>
+						  <p class="card-text">_ _ &#247; _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=1&oper=divide" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>			
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Division</h5>
+						  <p class="card-text">_ _  &#247; _ _</p>
+						  <a href="./kidsmath.html?minNum1=10&minNum2=10&oper=divide" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>		
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem; margin-top:20px;">
+						<img src="img/math.jpg" class="card-img-top" alt="&#43;">
+						<div class="card-body">
+						  <h5 class="card-title">Division</h5>
+						  <p class="card-text">_ _ _ &#247; _ _</p>
+						  <a href="./kidsmath.html?minNum1=100&minNum2=10&oper=divide" class="btn btn-primary">Go</a>
+						</div>
+					  </div>
+				</div>	
+			</div>
+
+
 		</div>
 	</section>
+
+
 </body>
 </html>

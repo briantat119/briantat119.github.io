@@ -1,27 +1,38 @@
 <html>
 <head>
-<style>
-body {
-	background-color: none; 
-	font-size:10px;
-	margin: 50px;
-}
-h1   {color: blue;}
-p    {color: blue;}
-td	{
-	color: green;
-	font-size:50px;
-	line-height:60px;
-	border-style: solid;
-	width: 350px;
-	background-color: white;
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>	
+	<style>
+	body {
+		margin-top: 50px;
+		font-size:10px;
+		overscroll-behavior: contain;
+	}
+	h1   {color: blue;}
+	p    {color: blue;}
+	td	{
+		color: green;
+		font-size:50px;
+		line-height:60px;
+		border-style: solid;
+		width: 350px;
+		background-color: white;
 
-}
+	}
 
-table {
+	table {
 
-}
-</style>
+	}
+
+	.ans_btn_class {
+		width:100%;
+		font-size: 30px;
+		margin: 20px 0px;
+	}
+	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
@@ -30,6 +41,7 @@ var vocabMeaning = ["放棄", "能力", "能夠", "流產", "關於", "以上", 
 
 var correctOptionId, calAns;
 var questionCount=0, correctCount=0, incorrectCount=0;
+var totalScore=0;
 
 var speech = new SpeechSynthesisUtterance();
 
@@ -40,28 +52,78 @@ var speech = new SpeechSynthesisUtterance();
 
 var voices = speechSynthesis.getVoices();
 
-var minNum1 = 100; /* 10 mean 2 digits */
-var minNum2 = 10; /* 10 mean 2 digits */
+var minNum1 = 10; /* 10 mean 2 digits */
+var minNum2 = 1; /* 10 mean 2 digits */
 var formula;
 var formulaOper = "+";
 
-function assignAns(calAns, correctOption, optionIdx) {
+var ansMap = new Map();
 
+const formulaOperMap = new Map([
+  ['add', '+'],
+  ['minus', '-'],
+  ['multiply', '*'],
+  ['divide', '/'],
+]);
+
+
+async function speakWord(btnTxt) {
+	Promise.allSettled([
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 2000)),
+		new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 5000)),
+		new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 5000))
+		])
+		.then(function(value) {
+
+		});
+
+
+
+}
+
+function speakWordWithLang(btnTxt, lang) {
+	
+	console.log("speak"+btnTxt);
+	speech.text = btnTxt;            
+	
+	speech.lang = lang;
+
+	console.log("speech.lang"+speech.lang);
+	window.speechSynthesis.speak(speech);
+
+};
+
+function assignAns(calAns, correctOption, optionIdx) {
 
 	if (correctOption == optionIdx) {
 		$("#ans"+optionIdx).text(calAns);
 		correctOptionId = "ans"+optionIdx;
+		
+		ansMap.set(calAns, optionIdx);
 	}
 	else {
-		var wrongAns = "";
-		if (calAns.toString().indexOf("...") == -1) {
-			wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
-		}
-		else {
-			wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
+		var isDuplicatedAns = true;
+		
+		while (isDuplicatedAns) {
+			var wrongAns = "";
+			if (calAns.toString().indexOf("...") == -1) {
+				wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
+				
+			}
+			else {
+				wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
+
+			}
+			$("#ans"+optionIdx).text(wrongAns);
+
+			if (!ansMap.has(wrongAns)) {
+				isDuplicatedAns = false;
+				ansMap.set(wrongAns, optionIdx);
+			}
+//			else {alert("dup");}
 
 		}
-		$("#ans"+optionIdx).text(wrongAns);			
 	}
 }
 
@@ -74,6 +136,16 @@ function refreshQuestion(voc) {
 	var firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
 
 	var secondNum = Math.floor((Math.random() * minNum2 * 9) + minNum2);
+	
+	if (formulaOper==="/") {
+		// Avoid divide by zero
+		secondNum++;
+
+		// Avoid first num > second num	
+		if (secondNum > firstNum) {
+			secondNum = firstNum - 1;
+		}
+	}
 	
 	formula = firstNum + " " + formulaOper + " " + secondNum +" = ?";
 	
@@ -96,7 +168,15 @@ function refreshQuestion(voc) {
 
 		 case "/":
 		 	formula = firstNum + " " + "&divide;" + " " + secondNum +" = ?";
-			calculatedAns = (firstNum-(firstNum % secondNum))/secondNum +"..."+ firstNum % secondNum;
+			
+			var remainder = firstNum % secondNum;
+			
+			if (remainder!=0) {
+				calculatedAns = (firstNum-(firstNum % secondNum))/secondNum +"..."+ firstNum % secondNum;
+			}
+			else {
+				calculatedAns = (firstNum-(firstNum % secondNum))/secondNum;
+			}
 			break;			
 		 default:
 			calculatedAns = 0;
@@ -109,6 +189,8 @@ function refreshQuestion(voc) {
 	
 	var correctOption = Math.floor(Math.random() * 4);
 	
+	ansMap = new Map();
+	
 	for (var i=0; i<4; i++) {
 		assignAns(calculatedAns, correctOption, i);
 	}
@@ -119,24 +201,80 @@ function refreshQuestion(voc) {
 
 $(function() {
 	$(".ans_btn_class").on('click', function() {
+
 		$(this).attr('disabled', true);
 
-//		alert($(this).val());
+		// alert($(this).val());
+		var selectedAnsTxt =$(this).text();
+
+		
+
+
 		if ($(this).val() == correctOptionId) {
 //			alert("correct");
 			correctCount++;
+			totalScore += 4;
+			appendListItem("correctListId", formula, selectedAnsTxt); 
+
+			if (totalScore > 100) {
+				totalScore = 100;
+
+				var luckyDrawId = Math.floor(Math.random() * 4);
+				$("#luckyDrawBadge"+luckyDrawId).show();
+
+				$('#luckyDrawModalId').modal('show');
+			}
+			else {
+				$('#correctModalId').modal('show');
+			}
+
 			$("#correct_count").text(correctCount);
-			$("#correct_list").append("|"+formula);
-//			setTimeout(function(){ refreshQuestion("fsadfd"); }, 1500);
-			refreshQuestion("fsadfd");
+			// $("#correct_list").append("|"+formula);
+
+			// document.querySelector(".progress-bar").style.width = correctCount + "%";
+
+			// document.querySelector(".progress-bar").style.width = correctCount + "%";
+
+//			setTimeout(function() {
+
+				speakWord(selectedAnsTxt); 
+//			}, 2000);
+
+
+
+			setTimeout(function() {
+//				alert(selectedAnsTxt);
+//				speakWord(selectedAnsTxt);
+				refreshQuestion("fsadfd");
+//				$('#correctModalId').modal('hide');
+			}, 5000);
+
+			// setTimeout(function(){  }, 2000);
+//			refreshQuestion("fsadfd");
 		}
 		else {
 //			alert("wrong");
 			incorrectCount++;
 			$("#incorrect_count").text(incorrectCount);			
-			$("#incorrect_list").append("|"+formula);
+//			$("#incorrect_list").append("|"+formula);
+			appendListItem("incorrectListId", formula, selectedAnsTxt); 
 
+
+			if (totalScore >=2) {
+				totalScore -= 2;
+
+			}	
+
+				$('#incorrectModalId').modal('show');
+				speakWord(selectedAnsTxt); 
+
+
+			// setTimeout(function() {
+			// 	$('#incorrectModalId').modal('hide');
+			// }, 10000);
 		}
+		$("#scoreBarId").width(totalScore+ "%");
+		$("#scoreBarId").text(totalScore);
 		$(this).attr('disabled', false);
 
 		 // do stuff		 
@@ -151,34 +289,37 @@ $(function() {
 
 	});
 	
-	$(".ans_class").on("click", function () {
+	// $(".ans_class").on("click", function () {
 	
-		console.log($(this).text());
-		speech.text = $(this).text();            
+	// 	console.log($(this).text());
+	// 	speech.text = $(this).text();            
 		
-		speech.lang = "en-US";
-		window.speechSynthesis.speak(speech);
+	// 	speech.lang = "en-US";
+	// 	window.speechSynthesis.speak(speech);
 
-		setTimeout(function(){ 
-			speech.lang = "zh-CN";
-			window.speechSynthesis.speak(speech);
-			
+	// 	setTimeout(function(){ 
+	// 		speech.lang = "zh-CN";
+	// 		window.speechSynthesis.speak(speech);
+	// 	}, 500);
 
-		}, 200);
-		
+	// });
+	
 
+	$( document ).ready(function() {
+		if (window.location.search) {
+			const queryString = window.location.search;
+			console.log(queryString);
 
+			const urlParams = new URLSearchParams(queryString);
+
+			minNum1 = urlParams.get('minNum1');
+			minNum2 = urlParams.get('minNum2');	
+			formulaOper = formulaOperMap.get(urlParams.get('oper'));	
+
+			refreshQuestion('yes');
+		}
 	});
 	
-	
-	$(".formulatSetting").on("change", function () {
-
-		minNum1 = $("#setMinNumId1").val(); /* 10 mean 2 digits */
-		minNum2 = $("#setMinNumId2").val(); /* 10 mean 2 digits */
-		
-		formulaOper = $("#setOperId").val(); /* 10 mean 2 digits */
-		refreshQuestion('yes');
-	});
 /*
 	$("select").on("change", function () {
 		message.voice = voices[$(this).val()];
@@ -207,6 +348,18 @@ $(function() {
 });
 
 
+function appendListItem(listId, itemTitle, itemContent) {
+	var itemHtml = '<li class="list-group-item d-flex justify-content-between align-items-start">'+
+						'<div class="ms-2 me-auto">'+
+							'<div class="fw-bold">'+itemTitle+'</div>'+
+							itemContent+
+						'</div>'+
+					'</li>';
+	
+	$("#"+listId).append(itemHtml);
+
+}
+
 //document.getElementById("demo").innerHTML = myFunction(4, 3);
 </script>
 
@@ -217,28 +370,199 @@ $(function() {
         <select id="voice"></select>
     </label>
 </p-->
+	<section id="questionSectionId">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12" style="height:50px;">
+					<div class="progress" style="height: 60px; font-size: 20px; margin-top:0px;">
+						<div id="scoreBarId" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+					</div>		
+				</div>		
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" style="height:30px;">
+					<span class="badge text-bg-danger" id="luckyDrawBadge" style="font-size:15px;">Score</span>
+				</div>		
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" style="margin-top:30px">
+					<p id="vocab_question" style="font-size:50px;">gfsdgd</p>			
+				</div>	
+			</div>
+
+		</div>
+	</section>
+
+	<section id="answerSectionId">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans0" class="ans_class ans_btn_class btn btn-primary" value="ans0">Primary</button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans1" class="ans_class ans_btn_class btn btn-primary" value="ans1">Primary</button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans2" class="ans_class ans_btn_class btn btn-primary" value="ans2">Primary</button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans3" class="ans_class ans_btn_class btn btn-primary" value="ans3">Primary</button>
+				</div>	
+			</div>
+
+		</div>
+
+	</section>
+
+
+	<div class="modal fade correctModalClass" id="correctModalId">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title">Correct</h4>
+			</div>
+			<div class="modal-body">
+			  <p>Score +4 !</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="modal fade correctModalClass" id="incorrectModalId">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title">Incorrect</h4>
+			</div>
+			<div class="modal-body">
+			  <p>Score -2 !</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+
+	<section id="luckyDrawSectionId">
+		<div class="modal fade correctModalClass" id="luckyDrawModalId">
+			<div class="modal-dialog modal-fullscreen-sm-down">
+			  <div class="modal-content">
+
+				<!-- Disneyland-->
+				<div class="card text-bg-dark" id="luckyDrawBadge0" style="display:none;">
+					<img src="img/disney.webp" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Disneyland</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
+
+				<!-- Cheaplab-->
+				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
+					<img src="img/cheaplab.webp" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Cheap Lab</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Cheap Lab stamp and you will be eligible to redeem a trip to Cheap Lab once you have collected 50 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
+
+				<!-- Monopoly-->
+				<div class="card text-bg-dark" id="luckyDrawBadge2" style="display:none;">
+					<img src="img/monopoly.webp" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Monopoly</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
+				
+				<!-- Rummikub-->
+				<div class="card text-bg-dark" id="luckyDrawBadge3" style="display:none;">
+					<img src="img/rum.png" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Rummikub</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Rummikub stamp and you will be eligible to redeem a chance to play Rummikub once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+
+
+	<section id="scoreDetailSectionId">
+		<div class="container" style="margin-top:30px;">
+
+			<div class="row">
+				<div class="col-md-12">
 
 
 
-<p id="vocab_question" style="font-size:100px;">gfsdgd</p>	
-	<table>
-		<tr>
-			<td><span id="ans0" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans0">&#9734;</button></td>
-			<td><span id="ans1" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans1">&#9734;</button></td>
-		</tr>
-		<tr>
-			<td><span id="ans2" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans2">&#9734;</button></td>
-			<td><span id="ans3" class="ans_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="ans_btn_class" value="ans3">&#9734;</button></td>
-		</tr>
-	</table>
-<p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
-<p id="correct_list" style="font-size:15px"></p>
-<p style="font-size:30px">Incorrect:</p><p id="incorrect_count" style="font-size:30px"></p>
-<p id="incorrect_list" style="font-size:15px"></p>
+					<div class="accordion" id="scoreDetailAccordionId">
+						<div class="accordion-item">
+						<h2 class="accordion-header" id="headingOne">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							Correct  
+							<span id="correct_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-success"></span>
+							</button>
+						</h2>
+						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								
+								<ol id="correctListId" class="list-group list-group-numbered">
+									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+									  <div class="ms-2 me-auto">
+										<div class="fw-bold">Subheading</div>
+										Content for list item
+									  </div>
+									</li> -->
 
-	 Minimum for 1st number: <input id="setMinNumId1" class="formulatSetting" type="text" name="settingMinNum1" value="100"/>  
-	 Minimum for 2nd number:  <input id="setMinNumId2" class="formulatSetting" type="text" name="settingMinNum2" value="10"/>
-	 Operator:  <input id="setOperId" class="formulatSetting" type="text" name="settingOper" value="+"/>
+								</ol>
+							
+							</div>
+						</div>
+						</div>
+						<div class="accordion-item">
+						<h2 class="accordion-header" id="headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Incorrect List
+								<span id="incorrect_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger"></span>
+							</button>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<ol id="incorrectListId" class="list-group list-group-numbered">
+									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+									  <div class="ms-2 me-auto">
+										<div class="fw-bold">Subheading</div>
+										Content for list item
+									  </div>
+									</li> -->
+
+								</ol>							
+							</div>
+						</div>
+						</div>
+					</div>
+		
+		
+				</div>
+			</div>
+		</div>
+
+	</section>
+
 
 </body>
 </html>
