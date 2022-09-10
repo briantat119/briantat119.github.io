@@ -62,10 +62,10 @@ var ansMap = new Map();
 
 function speakWord(btnTxt) {
 	Promise.allSettled([
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0))
-		
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 1500))
 		])
-		.then(speakWordWithLang(btnTxt, "zh-CN"));
+		.then();
 
 
 }
