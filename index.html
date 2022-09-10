@@ -211,8 +211,8 @@ $(function() {
 			if (totalScore > 100) {
 				totalScore = 100;
 
-				var luckyDrawId = Math.floor(Math.random() * 6);
-				$("#luckyDrawBadge"+0).show();
+				var luckyDrawId = Math.floor(Math.random() * 2);
+				$("#luckyDrawBadge"+luckyDrawId).show();
 
 				$('#luckyDrawModalId').modal('show');
 			}
@@ -426,18 +426,29 @@ $(function() {
 			<div class="modal-dialog modal-fullscreen-sm-down">
 			  <div class="modal-content">
 
-		<div class="card text-bg-dark" id="luckyDrawBadge0">
-			<img src="img/disney.webp" class="card-img" alt="...">
-			<div class="card-img-overlay">
-			  <h5 class="card-title">Disneyland</h5>
-			  <p class="card-text" style="color:white;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps.</p>
-			  <p class="card-text" style="color:white;">Reference Number: REF</p>
-			</div>
-		  </div>
+				<!-- Disneyland-->
+				<div class="card text-bg-dark" id="luckyDrawBadge0" style="display:none;">
+					<img src="img/disney.webp" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Disneyland</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
 
+				<!-- Cheaplab-->
+				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
+					<img src="img/cheaplab.webp" class="card-img" alt="...">
+					<div class="card-img-overlay">
+					<h5 class="card-title">Cheap Lab</h5>
+					<p class="card-text" style="color:white;">Congratulations! You have won a Cheap Lab stamp and you will be eligible to redeem a trip to Cheap Lab once you have collected 100 stamps.</p>
+					<p class="card-text" style="color:white;">Reference Number: REF</p>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
-  </div>
 	</section>
 <p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
 <p id="correct_list" style="font-size:15px"></p>
