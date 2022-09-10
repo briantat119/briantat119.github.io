@@ -60,32 +60,24 @@ var formulaOper = "+";
 var ansMap = new Map();
 
 
-Promise.allSettled([
-  Promise.resolve(33),
-  new Promise((resolve) => setTimeout(() => resolve(66), 0)),
-  99,
-  Promise.reject(new Error('an error'))
-])
-.then((values) => console.log(values));
-
 function speakWord(btnTxt) {
 	Promise.allSettled([
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 1500)),
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 3000))
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0))
+		
 		])
-		.then((values) => console.log(values));
+		.then(speakWordWithLang(btnTxt, "zh-CN"));
 
 
 }
 
 function speakWordWithLang(btnTxt, lang) {
 	
-	alert("speak"+btnTxt);
+	console.log("speak"+btnTxt);
 	speech.text = btnTxt;            
 	
 	speech.lang = lang;
 
-	alert("speech.lang"+speech.lang);
+	console.log("speech.lang"+speech.lang);
 	window.speechSynthesis.speak(speech);
 
 };
