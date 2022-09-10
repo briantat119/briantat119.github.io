@@ -207,7 +207,8 @@ $(function() {
 //			alert("correct");
 			correctCount++;
 			totalScore += 40;
-			
+			appendListItem("correctListId", formula, selectedAnsTxt); 
+
 			if (totalScore > 100) {
 				totalScore = 100;
 
@@ -221,7 +222,7 @@ $(function() {
 			}
 
 			$("#correct_count").text(correctCount);
-			$("#correct_list").append("|"+formula);
+			// $("#correct_list").append("|"+formula);
 
 			// document.querySelector(".progress-bar").style.width = correctCount + "%";
 
@@ -248,8 +249,10 @@ $(function() {
 //			alert("wrong");
 			incorrectCount++;
 			$("#incorrect_count").text(incorrectCount);			
-			$("#incorrect_list").append("|"+formula);
+//			$("#incorrect_list").append("|"+formula);
+			appendListItem("incorrectListId", formula, selectedAnsTxt); 
 
+			
 			if (totalScore >=2) {
 				totalScore -= 2;
 
@@ -332,6 +335,18 @@ $(function() {
 	
 });
 
+
+function appendListItem(listId, itemTitle, itemContent) {
+	var itemHtml = '<li class="list-group-item d-flex justify-content-between align-items-start">'+
+						'<div class="ms-2 me-auto">'+
+							'<div class="fw-bold">'+itemTitle+'</div>'+
+							itemContent+
+						'</div>'+
+					'</li>';
+	
+	$("#"+listId).append(itemHtml);
+
+}
 
 //document.getElementById("demo").innerHTML = myFunction(4, 3);
 </script>
@@ -472,10 +487,69 @@ $(function() {
 		</div>
 	</div>
 	</section>
-<p style="font-size:30px">Correct:</p><p id="correct_count" style="font-size:30px"></p>
-<p id="correct_list" style="font-size:15px"></p>
-<p style="font-size:30px">Incorrect:</p><p id="incorrect_count" style="font-size:30px"></p>
-<p id="incorrect_list" style="font-size:15px"></p>
+
+
+	<section id="scoreDetailSectionId">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12" style="height:50px;">
+
+
+
+					<div class="accordion" id="scoreDetailAccordionId">
+						<div class="accordion-item">
+						<h2 class="accordion-header" id="headingOne">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							Correct  
+							<span id="correct_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-success"></span>
+							</button>
+						</h2>
+						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								
+								<ol id="correctListId" class="list-group list-group-numbered">
+									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+									  <div class="ms-2 me-auto">
+										<div class="fw-bold">Subheading</div>
+										Content for list item
+									  </div>
+									</li> -->
+
+								</ol>
+							
+							</div>
+						</div>
+						</div>
+						<div class="accordion-item">
+						<h2 class="accordion-header" id="headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Incorrect List
+								<span id="incorrect_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger"></span>
+							</button>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<ol id="incorrectListId" class="list-group list-group-numbered">
+									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+									  <div class="ms-2 me-auto">
+										<div class="fw-bold">Subheading</div>
+										Content for list item
+									  </div>
+									</li> -->
+
+								</ol>							
+							</div>
+						</div>
+						</div>
+					</div>
+		
+		
+				</div>
+			</div>
+		</div>
+
+	</section>
 
 	 Minimum for 1st number: <input id="setMinNumId1" class="formulatSetting" type="text" name="settingMinNum1" value="10"/>  
 	 Minimum for 2nd number:  <input id="setMinNumId2" class="formulatSetting" type="text" name="settingMinNum2" value="1"/>
