@@ -146,6 +146,18 @@ function refreshQuestion(voc) {
 			secondNum = firstNum - 1;
 		}
 	}
+
+	else if (formulaOper==="-") {
+
+		// Avoid first num > second num	
+		if (firstNum == 0 || firstNum == "0") {
+secondNum = 0;
+}
+else if (secondNum > firstNum) {
+			secondNum = firstNum;
+		}
+	}
+
 	
 	formula = firstNum + " " + formulaOper + " " + secondNum +" = ?";
 	
