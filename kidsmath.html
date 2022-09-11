@@ -69,10 +69,10 @@ const formulaOperMap = new Map([
 
 async function speakWord(btnTxt) {
 	Promise.allSettled([
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 0)),
-		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 2000)),
-		new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 5000)),
-		new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 5000))
+		//new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 0)),
+		new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
+		new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 2500)),
+		new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 2500))
 		])
 		.then(function(value) {
 
@@ -238,7 +238,7 @@ $(function() {
 //			setTimeout(function() {
 
 				speakWord(selectedAnsTxt); 
-//			}, 2000);
+//			}, 500);
 
 
 
@@ -247,7 +247,7 @@ $(function() {
 //				speakWord(selectedAnsTxt);
 				refreshQuestion("fsadfd");
 //				$('#correctModalId').modal('hide');
-			}, 5000);
+			}, 2500);
 
 			// setTimeout(function(){  }, 2000);
 //			refreshQuestion("fsadfd");
