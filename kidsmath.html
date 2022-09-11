@@ -58,6 +58,10 @@
 		var formula;
 		var formulaOper = "+";
 
+		var formulaOper2 = "";
+		var minNum3 = 1; /* 10 mean 2 digits */
+		var formulaOper2before = true;
+
 		var ansMap = new Map();
 
 		const formulaOperMap = new Map([
@@ -159,7 +163,7 @@
 			}
 
 			
-			formula = firstNum + " " + formulaOper + " " + secondNum +" = ?";
+			formula = firstNum + " " + formulaOper + " " + secondNum;
 			
 			
 			var calculatedAns;
@@ -175,27 +179,126 @@
 				case "*":
 				case "x":
 				case "X":		 
+					formula = firstNum + " x " + secondNum;
 					calculatedAns = firstNum * secondNum;
 					break;
 
 				case "/":
-					formula = firstNum + " " + "&divide;" + " " + secondNum +" = ?";
-					
+					console.log("firstNum:"+firstNum);
+					console.log("secondNum:"+secondNum);					
 					var remainder = firstNum % secondNum;
-					
+					console.log("remainder:"+remainder);	
 					if (remainder!=0) {
-						calculatedAns = (firstNum-(firstNum % secondNum))/secondNum +"..."+ firstNum % secondNum;
+						if (!formulaOper2) {
+							calculatedAns = (firstNum-remainder)/secondNum +"..."+ firstNum % secondNum;
+							console.log("1calculatedAns:"+calculatedAns);	
+						}
+						else {
+							firstNum = firstNum - remainder;
+							calculatedAns = firstNum/secondNum;
+							console.log("2calculatedAns:"+calculatedAns);	
+						}
 					}
 					else {
-						calculatedAns = (firstNum-(firstNum % secondNum))/secondNum;
+						calculatedAns = (firstNum-remainder)/secondNum;
+						console.log("3calculatedAns:"+calculatedAns);	
 					}
+
+					console.log("rfirstNum:"+firstNum);
+					console.log("rsecondNum:"+secondNum);					
+					console.log("rremainder:"+remainder);	
+					console.log("rcalculatedAns:"+calculatedAns);	
+
+					formula = firstNum + " " + "&divide;" + " " + secondNum;
 					break;			
 				default:
 					calculatedAns = 0;
 			} 
 
 		//	formula += calculatedAns;
+			// has 2nd operator
+			if (formulaOper2) {
+				var thirdNum = Math.floor((Math.random() * minNum3 * 9) + minNum3);
 
+				if (Math.random() < 0.5) {
+					formulaOper2before = true;					
+				}
+				else {
+					formulaOper2before = false;					
+				}
+
+				if (formulaOper2==="-" || formulaOper2==="/") {
+					if (thirdNum > calculatedAns) {
+						formulaOper2before = true;
+					}
+					else {
+						formulaOper2before = false;
+					}
+				}
+
+
+				if (formulaOper2before) {
+					formula = thirdNum + " " + formulaOper2 +  " ("+formula+")";
+				}
+				else {						
+					formula = "("+formula+") " + formulaOper2 + " " +thirdNum;
+				}
+
+				switch(formulaOper2) {
+					case "-":
+						if (formulaOper2before) {
+							calculatedAns = thirdNum - calculatedAns;
+						}
+						else {
+							calculatedAns = calculatedAns - thirdNum;
+						}
+
+						break;
+					case "+":
+						calculatedAns = calculatedAns + thirdNum;
+						break;
+						
+					case "*":
+					case "x":
+					case "X":		 
+						formula = formula.replace("*", "x");
+						calculatedAns = calculatedAns * thirdNum;
+						break;
+
+					case "/":
+						if (formulaOper2before) {
+							var remainder = thirdNum % calculatedAns;
+						
+							if (remainder!=0) {
+								calculatedAns = (thirdNum-remainder)/calculatedAns +"..."+ thirdNum % calculatedAns;
+							}
+							else {
+								calculatedAns = (thirdNum-remainder)/calculatedAns;
+							}
+						}
+						else {
+							var remainder = calculatedAns % thirdNum;
+						
+							if (remainder!=0) {
+								calculatedAns = (calculatedAns-remainder)/thirdNum +"..."+ calculatedAns % thirdNum;
+							}
+							else {
+								calculatedAns = (calculatedAns-remainder)/thirdNum;
+							}
+						}
+						formula = formula.replace("/", "&divide;");					
+
+						break;			
+					default:
+						calculatedAns = 0;
+				} 
+
+
+
+			}			
+
+
+			formula +=" = ?";
 
 			$("#vocab_question").html(formula);
 			
@@ -296,7 +399,10 @@
 				courseId = urlParams.get('courseId');
 				minNum1 = urlParams.get('minNum1');
 				minNum2 = urlParams.get('minNum2');	
+				minNum3 = urlParams.get('minNum3');	
 				formulaOper = formulaOperMap.get(urlParams.get('oper'));	
+				formulaOper2 = formulaOperMap.get(urlParams.get('oper2'));	
+
 
 				refreshQuestion('yes');
 			}
