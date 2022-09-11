@@ -151,9 +151,9 @@ function refreshQuestion(voc) {
 
 		// Avoid first num > second num	
 		if (firstNum == 0 || firstNum == "0") {
-secondNum = 0;
-}
-else if (secondNum > firstNum) {
+			secondNum = 0;
+		}
+		else if (secondNum > firstNum) {
 			secondNum = firstNum;
 		}
 	}
@@ -228,7 +228,7 @@ $(function() {
 			totalScore += 4;
 			appendListItem("correctListId", formula, selectedAnsTxt); 
 
-			if (totalScore > 100) {
+			if (totalScore >= 100) {
 				totalScore = 100;
 
 				var luckyDrawId = Math.floor(Math.random() * 4);
