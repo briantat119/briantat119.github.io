@@ -227,12 +227,12 @@
 					if (totalScore >= 100) {
 						totalScore = 100;
 
-						var luckyDrawId = Math.floor(Math.random() * 4);
+						var luckyDrawId = Math.floor(Math.random() * 5);
 						$("#luckyDrawBadge"+luckyDrawId).show();
 
 						var date = new Date();
 
-						$("#luckyDrawRefNumId"+luckyDrawId).text(courseId+String(date.getDate()).padStart(2, '0')+String(date.getHours()).padStart(2, '0')+String(date.getMinutes()).padStart(2, '0'));
+						$("#luckyDrawRefNumId"+luckyDrawId).text(courseId+luckyDrawId+String(date.getDate()).padStart(2, '0')+String(date.getHours()).padStart(2, '0')+String(date.getMinutes()).padStart(2, '0'));
 
 						$('#luckyDrawModalId').modal('show');
 					}
