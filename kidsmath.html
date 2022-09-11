@@ -225,7 +225,7 @@ $(function() {
 		if ($(this).val() == correctOptionId) {
 //			alert("correct");
 			correctCount++;
-			totalScore += 4;
+			totalScore += 50;
 			appendListItem("correctListId", formula, selectedAnsTxt); 
 
 			if (totalScore >= 100) {
@@ -472,19 +472,17 @@ function appendListItem(listId, itemTitle, itemContent) {
 				<div class="card text-bg-dark" id="luckyDrawBadge0" style="display:none;">
 					<img src="img/disney.webp" class="card-img" alt="...">
 					<div class="card-img-overlay">
-					<h5 class="card-title">Disneyland</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
+						<h5 class="card-title">Disneyland</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId0"></span></p>
 					</div>
 				</div>
 
-				<!-- Cheaplab-->
+				<!-- Ocean Park-->
 				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
-					<img src="img/cheaplab.webp" class="card-img" alt="...">
+					<img src="img/ocean_park.jpeg" class="card-img" alt="...">
 					<div class="card-img-overlay">
-					<h5 class="card-title">Cheap Lab</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Cheap Lab stamp and you will be eligible to redeem a trip to Cheap Lab once you have collected 50 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
+						<h5 class="card-title">Ocean Park</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Ocean Park stamp and you will be eligible to redeem a trip to Ocean Park once you have collected 200 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId1"></span></p>
 					</div>
 				</div>
 
@@ -492,9 +490,8 @@ function appendListItem(listId, itemTitle, itemContent) {
 				<div class="card text-bg-dark" id="luckyDrawBadge2" style="display:none;">
 					<img src="img/monopoly.webp" class="card-img" alt="...">
 					<div class="card-img-overlay">
-					<h5 class="card-title">Monopoly</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
+						<h5 class="card-title">Monopoly</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId2"></span></p>
 					</div>
 				</div>
 				
@@ -502,9 +499,17 @@ function appendListItem(listId, itemTitle, itemContent) {
 				<div class="card text-bg-dark" id="luckyDrawBadge3" style="display:none;">
 					<img src="img/rum.png" class="card-img" alt="...">
 					<div class="card-img-overlay">
-					<h5 class="card-title">Rummikub</h5>
-					<p class="card-text" style="color:white;">Congratulations! You have won a Rummikub stamp and you will be eligible to redeem a chance to play Rummikub once you have collected 100 stamps.</p>
-					<p class="card-text" style="color:white;">Reference Number: REF</p>
+						<h5 class="card-title">Rummikub</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Rummikub stamp and you will be eligible to redeem a chance to play Rummikub once you have collected 100 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId3"></span></p>
+					</div>
+				</div>
+
+				<!-- Jumpingym-->
+				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
+					<img src="img/jumpingym.jpg" class="card-img" alt="...">
+					<div class="card-img-overlay">
+						<h5 class="card-title">Jumpingym</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Jumpingym stamp and you will be eligible to redeem a trip to Jumpingym once you have collected 200 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId4"></span></p>
 					</div>
 				</div>
 			</div>
