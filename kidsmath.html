@@ -220,6 +220,11 @@
 			if (formulaOper2) {
 				var thirdNum = Math.floor((Math.random() * minNum3 * 9) + minNum3);
 
+				if (formulaOper2==="/") {
+					// Avoid divide by zero
+					thirdNum++;
+				}
+
 				if (Math.random() < 0.5) {
 					formulaOper2before = true;					
 				}
@@ -275,9 +280,19 @@
 						break;
 
 					case "/":
+
+					console.log("2/rfirstNum:"+firstNum);
+					console.log("2/rsecondNum:"+secondNum);					
+
+					console.log("2/rthirdNum:"+thirdNum);					
+					console.log("2/rcalculatedAns:"+calculatedAns);	
+						
+
+
+
 						if (formulaOper2before) {
 							var remainder = thirdNum % calculatedAns;
-						
+							console.log("2/rremainder:"+remainder);							
 							if (remainder!=0) {
 								calculatedAns = (thirdNum-remainder)/calculatedAns +"..."+ thirdNum % calculatedAns;
 							}
@@ -295,6 +310,8 @@
 								calculatedAns = (calculatedAns-remainder)/thirdNum;
 							}
 						}
+						console.log("22/rcalculatedAns:"+calculatedAns);	
+
 						formula = formula.replace("/", "&divide;");					
 
 						break;			
