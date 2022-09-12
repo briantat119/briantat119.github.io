@@ -1,0 +1,677 @@
+<html lang="en-US">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>	
+	<style>
+		body {
+			margin-top: 50px;
+			font-size:15px;
+			overscroll-behavior: contain;
+		}
+		h1   {color: blue;}
+		p    {color: blue;}
+		td	{
+			color: green;
+			font-size:50px;
+			line-height:60px;
+			border-style: solid;
+			width: 350px;
+			background-color: white;
+
+		}
+
+		table {
+
+		}
+
+		.ans_btn_class {
+			width:100%;
+			font-size: 30px;
+			margin-top: 20px;
+		}
+	</style>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script>
+		var vocab = ["abandon", "ability", "able", "abortion", "about", "above", "abroad", "absence", "absolute", "absolutely", "absorb", "abuse", "academic", "accept", "access", "accident", "accompany", "accomplish", "according", "account", "accurate", "accuse", "achieve", "achievement", "acid", "acknowledge", "acquire", "across", "act", "action", "active", "activist", "activity", "actor", "actress", "actual", "actually", "ad", "adapt", "add", "addition", "additional", "address", "adequate", "adjust", "adjustment", "administration", "administrator", "admire", "admission", "admit", "adolescent", "adopt", "adult", "advance", "advanced", "advantage", "adventure", "advertising", "advice", "advise", "adviser", "advocate", "affair", "affect", "afford", "afraid", "African", "African-American", "after", "afternoon", "again", "against", "age", "agency", "agenda", "agent", "aggressive", "ago", "agree", "agreement", "agricultural", "ah", "ahead", "aid", "aide", "AIDS", "aim", "air", "aircraft", "airline", "airport", "album", "alcohol", "alive", "all", "alliance", "allow", "ally", "almost", "alone", "along", "already", "also", "alter", "alternative", "although", "always", "AM", "amazing", "American", "among", "amount", "analysis", "analyst", "analyze", "ancient", "and", "anger", "angle", "angry", "animal", "anniversary", "announce", "annual", "another", "answer", "anticipate", "anxiety", "any", "anybody", "anymore", "anyone", "anything", "anyway", "anywhere", "apart", "apartment", "apparent", "apparently", "appeal", "appear", "appearance", "apple", "application", "apply", "appoint", "appointment", "appreciate", "approach", "appropriate", "approval", "approve", "approximately", "Arab", "architect", "area", "argue", "argument", "arise", "arm", "armed", "army", "around", "arrange", "arrangement", "arrest", "arrival", "arrive", "art", "article", "artist", "artistic", "as", "Asian", "aside", "ask", "asleep", "aspect", "assault", "assert", "assess", "assessment", "asset", "assign", "assignment", "assist", "assistance", "assistant", "associate", "association", "assume", "assumption", "assure", "at", "athlete", "athletic", "atmosphere", "attach", "attack", "attempt", "attend", "attention", "attitude", "attorney", "attract", "attractive", "attribute", "audience", "author", "authority", "auto", "available", "average", "avoid", "award", "aware", "awareness", "away", "awful"];;
+		var vocabMeaning = ["放棄", "能力", "能夠", "流產", "關於", "以上", "國外", "缺席", "絕對", "絕對", "吸收", "濫用", "學術的", "接受", "訪問", "事故", "陪", "完成", "根據", "帳戶", "準確", "控告", "實現", "成就", "酸", "確認", "獲得", "跨越", "法案", "行動", "活性", "活動家", "活動", "演員", "演員", "實際", "其實", "廣告", "適應", "加", "加成", "額外", "地址", "充足", "調整", "調整", "行政", "管理員", "欣賞", "入場", "承認", "青少年", "採用", "成人", "提前", "高級", "優點", "冒險", "廣告", "忠告", "勸告", "顧問", "主張", "事務", "影響", "買得起", "害怕", "非洲人", "非裔美國人", "後", "下午", "再次", "反對", "年齡", "機構", "議程", "代理人", "好鬥的", "前", "同意", "協議", "農業的", "啊", "先", "援助", "助手", "艾滋病", "目標", "空氣", "飛機", "航空公司", "飛機場", "專輯", "醇", "活", "所有", "聯盟", "允許", "盟國", "幾乎", "單獨", "沿", "已經", "也", "改變", "另類", "雖然", "總是", "上午", "驚人", "美國人", "其中", "量", "分析", "分析員", "分析", "古", "和", "憤怒", "角度", "憤怒", "動物", "週年", "宣布", "年度", "另一個", "回答", "預料", "焦慮", "任何", "任何人", "不再", "任何人", "任何東西", "無論如何", "任何地方", "分開", "公寓", "明顯的", "顯然地", "上訴", "出現", "出現", "蘋果", "應用", "應用", "委", "約定", "欣賞", "方法", "適當", "認可", "批准", "約", "阿拉伯", "建築師", "區", "爭論", "論據", "出現", "臂", "武裝的", "軍隊", "周圍", "安排", "安排", "逮捕", "到達", "到達", "藝術", "文章", "藝術家", "藝術的", "如", "亞洲人", "在旁邊", "問", "睡著了", "方面", "突擊", "斷言", "評估", "評定", "資產", "分配", "分配", "助攻", "幫助", "助理", "關聯", "協會", "承擔", "假設", "保證", "在", "運動員", "運動的", "大氣層", "連接", "攻擊", "嘗試", "出席", "注意", "態度", "律師", "吸引", "有魅力", "屬性", "聽眾", "作者", "權威", "汽車", "有空", "平均", "避免", "獎", "知道的", "意識", "遠", "可怕"];
+
+		var correctOptionId, calAns;
+		var questionCount=0, correctCount=0, incorrectCount=0;
+		var totalScore=0;
+
+		var speech = new SpeechSynthesisUtterance();
+
+		speech.volume = 1;
+		speech.rate = 1;
+		speech.pitch = 1;                
+
+		var voices = speechSynthesis.getVoices();
+
+		var courseId;
+		var minNum1 = 10; /* 10 mean 2 digits */
+		var minNum2 = 1; /* 10 mean 2 digits */
+		var formula;
+		var formulaOper = "+";
+
+		var formulaOper2 = "";
+		var minNum3 = 1; /* 10 mean 2 digits */
+		var formulaOper2before = true;
+
+		var ansMap = new Map();
+
+		const formulaOperMap = new Map([
+		['add', '+'],
+		['minus', '-'],
+		['multiply', '*'],
+		['divide', '/'],
+		]);
+
+
+		async function speakWord(btnTxt) {
+			Promise.allSettled([
+				//new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 0)),
+				new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
+				new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 2500)),
+				new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 2500))
+				])
+				.then(function(value) {
+
+				});
+
+
+
+		}
+
+		function speakWordWithLang(btnTxt, lang) {
+			
+			console.log("speak"+btnTxt);
+			speech.text = btnTxt;            
+			
+			speech.lang = lang;
+
+			console.log("speech.lang"+speech.lang);
+			window.speechSynthesis.speak(speech);
+
+		};
+
+		function assignAns(calAns, correctOption, optionIdx) {
+
+			if (correctOption == optionIdx) {
+				$("#ans"+optionIdx).text(calAns);
+				correctOptionId = "ans"+optionIdx;
+				
+				ansMap.set(calAns, optionIdx);
+			}
+			else {
+				var isDuplicatedAns = true;
+				
+				while (isDuplicatedAns) {
+					var wrongAns = "";
+					if (calAns.toString().indexOf("...") == -1) {
+						wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
+						
+					}
+					else {
+						wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
+
+					}
+					$("#ans"+optionIdx).text(wrongAns);
+
+					if (!ansMap.has(wrongAns)) {
+						isDuplicatedAns = false;
+						ansMap.set(wrongAns, optionIdx);
+					}
+		//			else {alert("dup");}
+
+				}
+			}
+		}
+
+		function refreshQuestion(voc) {
+			console.log("---------refreshQuestion--------");
+			questionCount++;
+
+//			calAns = Math.floor(Math.random() * vocab.length);
+
+			var firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
+
+			var secondNum = Math.floor((Math.random() * minNum2 * 9) + minNum2);
+			
+
+
+
+			if (formulaOper==="/") {
+				// Avoid divide by zero
+				secondNum++;
+
+				// Avoid first num > second num	
+				if (secondNum > firstNum) {
+					firstNum = firstNum + 1;
+				}
+			}
+
+			else if (formulaOper==="-") {
+
+				// Avoid first num > second num	
+				if (firstNum == 0 || firstNum == "0") {
+					secondNum = 0;
+				}
+				else if (secondNum > firstNum) {
+					secondNum = firstNum;
+				}
+			}
+
+			if (formulaOper==="/" || formulaOper2==="/") {
+				var isBadNumForComplexFormula = true;
+				
+				while (isBadNumForComplexFormula) {
+					
+					if (firstNum==0) {
+						firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
+					} 
+
+					if (secondNum==0) {
+						secondNum = Math.floor((Math.random() * minNum1 * 9) + minNum2);
+					} 
+					
+					if (firstNum!=0 && secondNum!=0) {
+						isBadNumForComplexFormula = false;
+					}
+				}
+			}
+
+			
+			formula = firstNum + " " + formulaOper + " " + secondNum;
+			
+			
+			var calculatedAns;
+
+			switch(formulaOper) {
+				case "-":
+					calculatedAns = firstNum - secondNum;
+					break;
+				case "+":
+					calculatedAns = firstNum + secondNum;
+					break;
+					
+				case "*":
+				case "x":
+				case "X":		 
+					formula = firstNum + " x " + secondNum;
+					calculatedAns = firstNum * secondNum;
+					break;
+
+				case "/":
+					console.log("firstNum:"+firstNum);
+					console.log("secondNum:"+secondNum);					
+					var remainder = firstNum % secondNum;
+					console.log("remainder:"+remainder);	
+					if (remainder!=0) {
+						if (!formulaOper2) {
+							calculatedAns = (firstNum-remainder)/secondNum +"..."+ firstNum % secondNum;
+							console.log("1calculatedAns:"+calculatedAns);	
+						}
+						else {
+							firstNum = firstNum - remainder;
+							calculatedAns = firstNum/secondNum;
+							console.log("2calculatedAns:"+calculatedAns);	
+						}
+					}
+					else {
+						calculatedAns = (firstNum-remainder)/secondNum;
+						console.log("3calculatedAns:"+calculatedAns);	
+					}
+
+					console.log("rfirstNum:"+firstNum);
+					console.log("rsecondNum:"+secondNum);					
+					console.log("rremainder:"+remainder);	
+					console.log("rcalculatedAns:"+calculatedAns);	
+
+					formula = firstNum + " " + "&divide;" + " " + secondNum;
+					break;			
+				default:
+					calculatedAns = 0;
+			} 
+
+		//	formula += calculatedAns;
+			// has 2nd operator
+			if (formulaOper2) {
+				var thirdNum = Math.floor((Math.random() * minNum3 * 9) + minNum3);
+
+				if (formulaOper2==="/") {
+					// Avoid divide by zero
+					thirdNum++;
+
+				}
+
+				if (Math.random() < 0.5) {
+					formulaOper2before = true;					
+				}
+				else {
+					formulaOper2before = false;					
+				}
+
+				if (formulaOper2==="-" || formulaOper2==="/") {
+					if (thirdNum > calculatedAns) {
+						formulaOper2before = true;
+					}
+					else {
+						formulaOper2before = false;
+					}
+				}
+
+
+				if (formulaOper2before) {
+					formula = thirdNum + " " + formulaOper2 +  " ("+formula+")";
+				}
+				else {						
+					formula = "("+formula+") " + formulaOper2 + " " +thirdNum;
+				}
+
+				if ((formulaOper==="*" || formulaOper==="/") && formulaOper2!="/") {
+					
+					// Randomly remove () to make it more tricky
+					if (Math.random() < 0.5) {
+						formula = formula.replace("(", "");
+						formula = formula.replace(")", "");
+					}
+				}
+
+				switch(formulaOper2) {
+					case "-":
+						if (formulaOper2before) {
+							calculatedAns = thirdNum - calculatedAns;
+						}
+						else {
+							calculatedAns = calculatedAns - thirdNum;
+						}
+
+						break;
+					case "+":
+						calculatedAns = calculatedAns + thirdNum;
+						break;
+						
+					case "*":
+					case "x":
+					case "X":		 
+						formula = formula.replace("*", "x");
+						calculatedAns = calculatedAns * thirdNum;
+						break;
+
+					case "/":
+
+					console.log("2/rfirstNum:"+firstNum);
+					console.log("2/rsecondNum:"+secondNum);					
+
+					console.log("2/rthirdNum:"+thirdNum);					
+					console.log("2/rcalculatedAns:"+calculatedAns);	
+						
+
+
+
+						if (formulaOper2before) {
+							var remainder = thirdNum % calculatedAns;
+							console.log("2/rremainder:"+remainder);							
+							if (remainder!=0) {
+								calculatedAns = (thirdNum-remainder)/calculatedAns +"..."+ thirdNum % calculatedAns;
+							}
+							else {
+								calculatedAns = (thirdNum-remainder)/calculatedAns;
+							}
+						}
+						else {
+							var remainder = calculatedAns % thirdNum;
+						
+							if (remainder!=0) {
+								calculatedAns = (calculatedAns-remainder)/thirdNum +"..."+ calculatedAns % thirdNum;
+							}
+							else {
+								calculatedAns = (calculatedAns-remainder)/thirdNum;
+							}
+						}
+						console.log("22/rcalculatedAns:"+calculatedAns);	
+
+						formula = formula.replace("/", "&divide;");					
+
+						break;			
+					default:
+						calculatedAns = 0;
+				} 
+
+
+
+			}			
+
+
+			formula +=" = ?";
+
+			$("#vocab_question").html(formula);
+			
+			var correctOption = Math.floor(Math.random() * 4);
+			
+			ansMap = new Map();
+			
+			for (var i=0; i<4; i++) {
+				assignAns(calculatedAns, correctOption, i);
+			}
+			
+			return;
+		}
+
+		$(function() {
+			$(".ans_btn_class").on('click', function() {
+
+				$(this).attr('disabled', true);
+
+				// alert($(this).val());
+				var selectedAnsTxt =$(this).text();
+
+				if ($(this).val() == correctOptionId) {
+		//			alert("correct");
+					correctCount++;
+					totalScore += 4;
+					appendListItem("correctListId", formula, selectedAnsTxt); 
+
+					if (totalScore >= 100) {
+						totalScore = 100;
+
+						var luckyDrawId = Math.floor(Math.random() * 5);
+
+						var date = new Date();
+						$("#luckyDrawRefNumId"+luckyDrawId).text(courseId+luckyDrawId+String(date.getDate()).padStart(2, '0')+String(date.getHours()).padStart(2, '0')+String(date.getMinutes()).padStart(2, '0'));
+
+						$("#luckyDrawBadge"+luckyDrawId).show();
+						$('#luckyDrawModalId').modal('show');
+					}
+					else {
+						$('#correctModalId').modal('show');
+					}
+
+					$("#correct_count").text(correctCount);
+
+					speakWord(selectedAnsTxt); 
+
+
+					setTimeout(function() {
+						refreshQuestion("yes");
+					}, 2500);
+
+
+				}
+				else {
+					incorrectCount++;
+					$("#incorrect_count").text(incorrectCount);			
+
+					appendListItem("incorrectListId", formula, selectedAnsTxt); 
+
+
+					if (totalScore >=2) {
+						totalScore -= 2;
+
+					}	
+
+					$('#incorrectModalId').modal('show');
+					speakWord(selectedAnsTxt); 
+
+				}
+				$("#scoreBarId").width(totalScore+ "%");
+				$("#scoreBarId").text(totalScore);
+				$(this).attr('disabled', false);
+
+				// do stuff		 
+			});
+			
+			
+			$("#vocab_question").on("click", function () {
+				console.log($(this).text());
+				speech.text = $(this).text();            
+				speech.lang = "en-US";
+				window.speechSynthesis.speak(speech);
+
+			});
+			
+			
+		});
+
+		$( document ).ready(function() {
+			if (window.location.search) {
+				const queryString = window.location.search;
+				console.log(queryString);
+
+				const urlParams = new URLSearchParams(queryString);
+
+				courseId = urlParams.get('courseId');
+				minNum1 = urlParams.get('minNum1');
+				minNum2 = urlParams.get('minNum2');	
+				minNum3 = urlParams.get('minNum3');	
+				formulaOper = formulaOperMap.get(urlParams.get('oper'));	
+				formulaOper2 = formulaOperMap.get(urlParams.get('oper2'));	
+
+
+				refreshQuestion('yes');
+			}
+		});
+
+		function appendListItem(listId, itemTitle, itemContent) {
+			var itemHtml = '<li class="list-group-item d-flex justify-content-between align-items-start">'+
+								'<div class="ms-2 me-auto">'+
+									'<div class="fw-bold">'+itemTitle+'</div>'+
+									itemContent+
+								'</div>'+
+							'</li>';
+			
+			$("#"+listId).append(itemHtml);
+
+		}
+
+	</script>
+
+</head>
+<body onload="refreshQuestion('yes');">
+
+	<section id="questionSectionId">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12" style="height:50px;">
+					<div class="progress" style="height: 60px; font-size: 20px; margin-top:0px;">
+						<div id="scoreBarId" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0</div>
+					</div>		
+				</div>		
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" style="height:30px;">
+					<span class="badge text-bg-danger" id="luckyDrawBadge" style="font-size:15px;">Score</span>
+				</div>		
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" style="margin-top:30px">
+					<p id="vocab_question" style="font-size:50px;"></p>			
+				</div>	
+			</div>
+
+		</div>
+	</section>
+
+	<section id="answerSectionId">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans0" class="ans_class ans_btn_class btn btn-primary" value="ans0"></button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans1" class="ans_class ans_btn_class btn btn-primary" value="ans1"></button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans2" class="ans_class ans_btn_class btn btn-primary" value="ans2"></button>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" id="ans3" class="ans_class ans_btn_class btn btn-primary" value="ans3"></button>
+				</div>	
+			</div>
+
+		</div>
+
+	</section>
+
+
+	<div class="modal fade correctModalClass" id="correctModalId">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header bg-success">
+			  <h4 class="modal-title" style="color:#fff;">Correct</h4>
+			</div>
+			<div class="modal-body">
+			  <p style="font-size:20px;">Score +4  !</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="modal fade correctModalClass" id="incorrectModalId">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header bg-danger">
+			  <h4 class="modal-title" style="color:#fff;">Incorrect</h4>
+			</div>
+			<div class="modal-body">
+			  <p style="font-size:20px;">Score -2  !</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+
+	<section id="luckyDrawSectionId">
+		<div class="modal fade correctModalClass" id="luckyDrawModalId">
+			<div class="modal-dialog modal-fullscreen-sm-down">
+			  <div class="modal-content">
+
+				<!-- Disneyland-->
+				<div class="card text-bg-dark" id="luckyDrawBadge0" style="display:none;">
+					<img src="img/disney.webp" class="card-img" style="min-height:250px" alt="...">
+					<div class="card-img-overlay">
+						<h5 class="card-title" style="color:white; background: var(--bs-blue); opacity: 0.9; font-size:15px; padding:10px;">Disneyland</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Disneyland stamp and you will be eligible to redeem a trip to Disneyland once you have collected 100 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId0"></span></p>
+					</div>
+				</div>
+
+				<!-- Ocean Park-->
+				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
+					<img src="img/ocean_park.jpeg" class="card-img" style="min-height:250px" alt="...">
+					<div class="card-img-overlay">
+						<h5 class="card-title" style="color:white; background: var(--bs-blue); opacity: 0.9; font-size:15px; padding:10px;">Ocean Park</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Ocean Park stamp and you will be eligible to redeem a trip to Ocean Park once you have collected 200 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId1"></span></p>
+					</div>
+				</div>
+
+				<!-- Monopoly-->
+				<div class="card text-bg-dark" id="luckyDrawBadge2" style="display:none;">
+					<img src="img/monopoly.webp" class="card-img" style="min-height:250px" alt="...">
+					<div class="card-img-overlay">
+						<h5 class="card-title" style="color:white; background: var(--bs-blue); opacity: 0.9; font-size:15px; padding:10px;">Monopoly</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Monopoly stamp and you will be eligible to redeem a chance to play Monopoly once you have collected 100 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId2"></span></p>
+					</div>
+				</div>
+				
+				<!-- Rummikub-->
+				<div class="card text-bg-dark" id="luckyDrawBadge3" style="display:none;">
+					<img src="img/rum.png" class="card-img" style="min-height:250px" alt="...">
+					<div class="card-img-overlay">
+						<h5 class="card-title" style="color:white; background: var(--bs-blue); opacity: 0.9; font-size:15px; padding:10px;">Rummikub</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Rummikub stamp and you will be eligible to redeem a chance to play Rummikub once you have collected 100 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId3"></span></p>
+					</div>
+				</div>
+
+				<!-- Jumpingym-->
+				<div class="card text-bg-dark" id="luckyDrawBadge1" style="display:none;">
+					<img src="img/jumpingym.jpg" class="card-img" style="min-height:250px" alt="...">
+					<div class="card-img-overlay">
+						<h5 class="card-title" style="color:white; background: var(--bs-blue); opacity: 0.9; font-size:15px; padding:10px;">Jumpingym</h5>
+						<p class="card-text" style="color:white; background: #000; opacity: 0.7; font-size:15px; padding:10px;">Congratulations! You have won a Jumpingym stamp and you will be eligible to redeem a trip to Jumpingym once you have collected 200 stamps. <br><br>Reference Number: <span id="luckyDrawRefNumId4"></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+
+
+	<section id="scoreDetailSectionId">
+		<div class="container" style="margin-top:30px;">
+
+			<div class="row">
+				<div class="col-md-12">
+
+
+
+					<div class="accordion" id="scoreDetailAccordionId">
+						<div class="accordion-item">
+						<h2 class="accordion-header" id="headingOne">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							Correct  
+							<span id="correct_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-success"></span>
+							</button>
+						</h2>
+						<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								
+								<ol id="correctListId" class="list-group list-group-numbered">
+									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+									  <div class="ms-2 me-auto">
+										<div class="fw-bold">Subheading</div>
+										Content for list item
+									  </div>
+									</li> -->
+
+								</ol>
+							
+							</div>
+						</div>
+						</div>
+						<div class="accordion-item">
+						<h2 class="accordion-header" id="headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Incorrect List
+								<span id="incorrect_count" class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger"></span>
+							</button>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<ol id="incorrectListId" class="list-group list-group-numbered">
+									<!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+									  <div class="ms-2 me-auto">
+										<div class="fw-bold">Subheading</div>
+										Content for list item
+									  </div>
+									</li> -->
+
+								</ol>							
+							</div>
+						</div>
+						</div>
+					</div>
+		
+		
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+
+</body>
+</html>
