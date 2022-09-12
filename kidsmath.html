@@ -133,6 +133,7 @@
 		}
 
 		function refreshQuestion(voc) {
+			console.log("---------refreshQuestion--------");
 			questionCount++;
 
 //			calAns = Math.floor(Math.random() * vocab.length);
@@ -150,7 +151,7 @@
 
 				// Avoid first num > second num	
 				if (secondNum > firstNum) {
-					secondNum = firstNum - 1;
+					firstNum = firstNum + 1;
 				}
 			}
 
@@ -165,7 +166,7 @@
 				}
 			}
 
-			if (formulaOper2==="/") {
+			if (formulaOper==="/" || formulaOper2==="/") {
 				var isBadNumForComplexFormula = true;
 				
 				while (isBadNumForComplexFormula) {
@@ -272,7 +273,7 @@
 					formula = "("+formula+") " + formulaOper2 + " " +thirdNum;
 				}
 
-				if ((formulaOper==="*" || formulaOper==="/") && (formulaOper2==="+" || formulaOper2==="-")) {
+				if ((formulaOper==="*" || formulaOper==="/") && formulaOper2!="/") {
 					
 					// Randomly remove () to make it more tricky
 					if (Math.random() < 0.5) {
