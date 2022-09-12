@@ -135,12 +135,15 @@
 		function refreshQuestion(voc) {
 			questionCount++;
 
-			calAns = Math.floor(Math.random() * vocab.length);
+//			calAns = Math.floor(Math.random() * vocab.length);
 
 			var firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
 
 			var secondNum = Math.floor((Math.random() * minNum2 * 9) + minNum2);
 			
+
+
+
 			if (formulaOper==="/") {
 				// Avoid divide by zero
 				secondNum++;
@@ -159,6 +162,25 @@
 				}
 				else if (secondNum > firstNum) {
 					secondNum = firstNum;
+				}
+			}
+
+			if (formulaOper2==="/") {
+				var isBadNumForComplexFormula = true;
+				
+				while (isBadNumForComplexFormula) {
+					
+					if (firstNum==0) {
+						firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
+					} 
+
+					if (secondNum==0) {
+						secondNum = Math.floor((Math.random() * minNum1 * 9) + minNum2);
+					} 
+					
+					if (firstNum!=0 && secondNum!=0) {
+						isBadNumForComplexFormula = false;
+					}
 				}
 			}
 
@@ -223,6 +245,7 @@
 				if (formulaOper2==="/") {
 					// Avoid divide by zero
 					thirdNum++;
+
 				}
 
 				if (Math.random() < 0.5) {
@@ -469,7 +492,7 @@
 
 			<div class="row">
 				<div class="col-md-12" style="margin-top:30px">
-					<p id="vocab_question" style="font-size:50px;">gfsdgd</p>			
+					<p id="vocab_question" style="font-size:50px;"></p>			
 				</div>	
 			</div>
 
@@ -480,22 +503,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<button type="button" id="ans0" class="ans_class ans_btn_class btn btn-primary" value="ans0">Primary</button>
+					<button type="button" id="ans0" class="ans_class ans_btn_class btn btn-primary" value="ans0"></button>
 				</div>	
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button type="button" id="ans1" class="ans_class ans_btn_class btn btn-primary" value="ans1">Primary</button>
+					<button type="button" id="ans1" class="ans_class ans_btn_class btn btn-primary" value="ans1"></button>
 				</div>	
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button type="button" id="ans2" class="ans_class ans_btn_class btn btn-primary" value="ans2">Primary</button>
+					<button type="button" id="ans2" class="ans_class ans_btn_class btn btn-primary" value="ans2"></button>
 				</div>	
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button type="button" id="ans3" class="ans_class ans_btn_class btn btn-primary" value="ans3">Primary</button>
+					<button type="button" id="ans3" class="ans_class ans_btn_class btn btn-primary" value="ans3"></button>
 				</div>	
 			</div>
 
