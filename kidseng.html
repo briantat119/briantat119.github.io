@@ -37,10 +37,22 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	<script>
-		var vocab = ["abandon", "ability", "able", "abortion", "about", "above", "abroad", "absence", "absolute", "absolutely", "absorb", "abuse", "academic", "accept", "access", "accident", "accompany", "accomplish", "according", "account", "accurate", "accuse", "achieve", "achievement", "acid", "acknowledge", "acquire", "across", "act", "action", "active", "activist", "activity", "actor", "actress", "actual", "actually", "ad", "adapt", "add", "addition", "additional", "address", "adequate", "adjust", "adjustment", "administration", "administrator", "admire", "admission", "admit", "adolescent", "adopt", "adult", "advance", "advanced", "advantage", "adventure", "advertising", "advice", "advise", "adviser", "advocate", "affair", "affect", "afford", "afraid", "African", "African-American", "after", "afternoon", "again", "against", "age", "agency", "agenda", "agent", "aggressive", "ago", "agree", "agreement", "agricultural", "ah", "ahead", "aid", "aide", "AIDS", "aim", "air", "aircraft", "airline", "airport", "album", "alcohol", "alive", "all", "alliance", "allow", "ally", "almost", "alone", "along", "already", "also", "alter", "alternative", "although", "always", "AM", "amazing", "American", "among", "amount", "analysis", "analyst", "analyze", "ancient", "and", "anger", "angle", "angry", "animal", "anniversary", "announce", "annual", "another", "answer", "anticipate", "anxiety", "any", "anybody", "anymore", "anyone", "anything", "anyway", "anywhere", "apart", "apartment", "apparent", "apparently", "appeal", "appear", "appearance", "apple", "application", "apply", "appoint", "appointment", "appreciate", "approach", "appropriate", "approval", "approve", "approximately", "Arab", "architect", "area", "argue", "argument", "arise", "arm", "armed", "army", "around", "arrange", "arrangement", "arrest", "arrival", "arrive", "art", "article", "artist", "artistic", "as", "Asian", "aside", "ask", "asleep", "aspect", "assault", "assert", "assess", "assessment", "asset", "assign", "assignment", "assist", "assistance", "assistant", "associate", "association", "assume", "assumption", "assure", "at", "athlete", "athletic", "atmosphere", "attach", "attack", "attempt", "attend", "attention", "attitude", "attorney", "attract", "attractive", "attribute", "audience", "author", "authority", "auto", "available", "average", "avoid", "award", "aware", "awareness", "away", "awful"];;
+		var vocab = ["abandon", "ability", "able", "abortion", "about", "above", "abroad", "absence", "absolute", "absolutely", "absorb", "abuse", "academic", "accept", "access", "accident", "accompany", "accomplish", "according", "account", "accurate", "accuse", "achieve", "achievement", "acid", "acknowledge", "acquire", "across", "act", "action", "active", "activist", "activity", "actor", "actress", "actual", "actually", "ad", "adapt", "add", "addition", "additional", "address", "adequate", "adjust", "adjustment", "administration", "administrator", "admire", "admission", "admit", "adolescent", "adopt", "adult", "advance", "advanced", "advantage", "adventure", "advertising", "advice", "advise", "adviser", "advocate", "affair", "affect", "afford", "afraid", "African", "African-American", "after", "afternoon", "again", "against", "age", "agency", "agenda", "agent", "aggressive", "ago", "agree", "agreement", "agricultural", "ah", "ahead", "aid", "aide", "AIDS", "aim", "air", "aircraft", "airline", "airport", "album", "alcohol", "alive", "all", "alliance", "allow", "ally", "almost", "alone", "along", "already", "also", "alter", "alternative", "although", "always", "AM", "amazing", "American", "among", "amount", "analysis", "analyst", "analyze", "ancient", "and", "anger", "angle", "angry", "animal", "anniversary", "announce", "annual", "another", "answer", "anticipate", "anxiety", "any", "anybody", "anymore", "anyone", "anything", "anyway", "anywhere", "apart", "apartment", "apparent", "apparently", "appeal", "appear", "appearance", "apple", "application", "apply", "appoint", "appointment", "appreciate", "approach", "appropriate", "approval", "approve", "approximately", "Arab", "architect", "area", "argue", "argument", "arise", "arm", "armed", "army", "around", "arrange", "arrangement", "arrest", "arrival", "arrive", "art", "article", "artist", "artistic", "as", "Asian", "aside", "ask", "asleep", "aspect", "assault", "assert", "assess", "assessment", "asset", "assign", "assignment", "assist", "assistance", "assistant", "associate", "association", "assume", "assumption", "assure", "at", "athlete", "athletic", "atmosphere", "attach", "attack", "attempt", "attend", "attention", "attitude", "attorney", "attract", "attractive", "attribute", "audience", "author", "authority", "auto", "available", "average", "avoid", "award", "aware", "awareness", "away", "awful"];
 		var vocabMeaning = ["放棄", "能力", "能夠", "流產", "關於", "以上", "國外", "缺席", "絕對", "絕對", "吸收", "濫用", "學術的", "接受", "訪問", "事故", "陪", "完成", "根據", "帳戶", "準確", "控告", "實現", "成就", "酸", "確認", "獲得", "跨越", "法案", "行動", "活性", "活動家", "活動", "演員", "演員", "實際", "其實", "廣告", "適應", "加", "加成", "額外", "地址", "充足", "調整", "調整", "行政", "管理員", "欣賞", "入場", "承認", "青少年", "採用", "成人", "提前", "高級", "優點", "冒險", "廣告", "忠告", "勸告", "顧問", "主張", "事務", "影響", "買得起", "害怕", "非洲人", "非裔美國人", "後", "下午", "再次", "反對", "年齡", "機構", "議程", "代理人", "好鬥的", "前", "同意", "協議", "農業的", "啊", "先", "援助", "助手", "艾滋病", "目標", "空氣", "飛機", "航空公司", "飛機場", "專輯", "醇", "活", "所有", "聯盟", "允許", "盟國", "幾乎", "單獨", "沿", "已經", "也", "改變", "另類", "雖然", "總是", "上午", "驚人", "美國人", "其中", "量", "分析", "分析員", "分析", "古", "和", "憤怒", "角度", "憤怒", "動物", "週年", "宣布", "年度", "另一個", "回答", "預料", "焦慮", "任何", "任何人", "不再", "任何人", "任何東西", "無論如何", "任何地方", "分開", "公寓", "明顯的", "顯然地", "上訴", "出現", "出現", "蘋果", "應用", "應用", "委", "約定", "欣賞", "方法", "適當", "認可", "批准", "約", "阿拉伯", "建築師", "區", "爭論", "論據", "出現", "臂", "武裝的", "軍隊", "周圍", "安排", "安排", "逮捕", "到達", "到達", "藝術", "文章", "藝術家", "藝術的", "如", "亞洲人", "在旁邊", "問", "睡著了", "方面", "突擊", "斷言", "評估", "評定", "資產", "分配", "分配", "助攻", "幫助", "助理", "關聯", "協會", "承擔", "假設", "保證", "在", "運動員", "運動的", "大氣層", "連接", "攻擊", "嘗試", "出席", "注意", "態度", "律師", "吸引", "有魅力", "屬性", "聽眾", "作者", "權威", "汽車", "有空", "平均", "避免", "獎", "知道的", "意識", "遠", "可怕"];
 
-		var correctOptionId, calAns;
+
+
+		const vocabMap = new Map([
+		['ENA', ["abandon", "ability", "able", "abortion", "about", "above", "abroad", "absence", "absolute", "absolutely", "absorb", "abuse", "academic", "accept", "access", "accident", "accompany", "accomplish", "according", "account", "accurate", "accuse", "achieve", "achievement", "acid", "acknowledge", "acquire", "across", "act", "action", "active", "activist", "activity", "actor", "actress", "actual", "actually", "ad", "adapt", "add", "addition", "additional", "address", "adequate", "adjust", "adjustment", "administration", "administrator", "admire", "admission", "admit", "adolescent", "adopt", "adult", "advance", "advanced", "advantage", "adventure", "advertising", "advice", "advise", "adviser", "advocate", "affair", "affect", "afford", "afraid", "African", "African-American", "after", "afternoon", "again", "against", "age", "agency", "agenda", "agent", "aggressive", "ago", "agree", "agreement", "agricultural", "ah", "ahead", "aid", "aide", "AIDS", "aim", "air", "aircraft", "airline", "airport", "album", "alcohol", "alive", "all", "alliance", "allow", "ally", "almost", "alone", "along", "already", "also", "alter", "alternative", "although", "always", "AM", "amazing", "American", "among", "amount", "analysis", "analyst", "analyze", "ancient", "and", "anger", "angle", "angry", "animal", "anniversary", "announce", "annual", "another", "answer", "anticipate", "anxiety", "any", "anybody", "anymore", "anyone", "anything", "anyway", "anywhere", "apart", "apartment", "apparent", "apparently", "appeal", "appear", "appearance", "apple", "application", "apply", "appoint", "appointment", "appreciate", "approach", "appropriate", "approval", "approve", "approximately", "Arab", "architect", "area", "argue", "argument", "arise", "arm", "armed", "army", "around", "arrange", "arrangement", "arrest", "arrival", "arrive", "art", "article", "artist", "artistic", "as", "Asian", "aside", "ask", "asleep", "aspect", "assault", "assert", "assess", "assessment", "asset", "assign", "assignment", "assist", "assistance", "assistant", "associate", "association", "assume", "assumption", "assure", "at", "athlete", "athletic", "atmosphere", "attach", "attack", "attempt", "attend", "attention", "attitude", "attorney", "attract", "attractive", "attribute", "audience", "author", "authority", "auto", "available", "average", "avoid", "award", "aware", "awareness", "away", "awful"]],
+		['ENB', ["Byword", "Babe", "Bygone", "Backbone", "Button", "Backer", "Butterfly", "Badass", "Bustle", "Badassery", "Bush", "Balm", "Burly", "Balmy", "Bureaucrat", "Balsamic", "Buoyant", "Bam", "Bullet", "Banging", "Bulldozer", "Bankable", "Bulb", "Banner", "Building", "Banquet", "Bugbear", "Banzai", "Buffalo", "Bargain", "Bucolic", "Baronial", "Bubble", "Bash", "Brusque", "Bask", "Beady", "Brush", "Beam", "Browbeat", "Beaming", "Broccoli", "Beamish", "Broach", "Beamy", "Briskly", "Beatific", "Brisk", "Beatify", "Brilliant", "Beatitude", "Bright", "Beaucoup", "Bridge", "Beaut", "Brick", "Beauteous", "Brevity", "Beauteously", "Breathtaking", "Breakthrough", "Beautifully", "Bread", "Became", "Breach", "Beckon", "Bravura", "Becoming", "Bravo", "Bedazzle", "Bravery", "Bedeck", "Brave", "Bedrock", "Brandish", "Beefy", "Brake", "Befitting", "Brainy", "Begetter", "Brainchild", "Beguiling", "Brain", "Behave", "Braggart", "Behold", "Bracelet", "Bejeweled", "Bowl", "Believable", "Bounty", "Benediction", "Bottle", "Benefaction", "Born", "Benefactor", "Border", "Benefic", "Boot", "Beneficent", "Boost", "Benevolence", "Boom", "Benignant", "Bookstore", "Bent", "Bookshelf", "Bequest", "Book", "Bestseller", "Bonus", "Bestow", "Bonny", "Bestower", "Bone", "Betterment", "Bond", "Bewitching", "Bombings", "Bigwig", "Bomber", "Bijou", "Bombastic", "Binding", "Bomb", "Bingo", "Bolster", "Biophilia", "Bold", "Blameless", "Boisterous", "Blazing", "Bogus", "Blazingly", "Bodyguard", "Blinding", "Body", "Blissfully", "Bobcat", "Blithe", "Boat", "Blithely", "Board", "Blithesome", "Blueberry", "Blue", "Blockbuster", "Blow", "Bloom", "Blossom", "Boast", "Bloody", "Boastful", "Blushing", "Bodacious", "Blood", "Boffo", "Blog", "Bohemian", "Blocking", "Boisterously", "Blocked", "Bonzer", "Block", "Boombastic", "Blissful", "Booming", "Bliss", "Boon", "Blind", "Booster", "Blessing", "Boosterism", "Bless", "Bootylicious", "Blend", "Bosom", "Blemish", "Boss", "Bleary", "Bought", "Blaze", "Bounce", "Blatant", "Bouncy", "Blasting", "Bound", "Blast", "Bountiful", "Blasphemy", "Bountifully", "Blase", "Bouquet", "Blanket", "Boxer", "Blandish", "Boyfriend", "Blame", "Boyish", "Blackboard", "Bracing", "Bizarre", "Brainiest", "Bitcoin", "Brainstorming", "Birthday", "Birth", "Brass", "Bird", "Braw", "Bionic", "Brawn", "Biometric", "Brawny", "Billionaire", "Brazen", "Billion", "Breadwinner", "Billing", "Breath", "Bill", "Breeze", "Bike", "Breezy", "Big", "Bigot", "Brief", "Biggest", "Brighten", "Bigger", "Brill", "Bibliophile", "Brilliance", "Bibliography", "Brimming", "Beyond", "Brio", "Between", "Briskness", "Better", "Broad", "Beta", "Best", "Broaden", "Besmirch", "Besiege", "Berserk", "Bereft", "Broadminded", "Bereave", "Berate", "Bequeath", "Benign", "Benevolent", "Bubbling", "Benefit", "Beneficial", "Benedictory", "Beneath", "Bubbly", "Benchmark", "Belt", "Below", "Beloved", "Belong", "Belly", "Buddies", "Bell", "Believe", "Belief", "Beleaguer", "Behind", "Behest", "Budding", "Behavior", "Behalf", "Beguile", "Begrudge", "Beginning", "Begin", "Buddy", "Befuddled", "Befriend", "Before", "Beetle", "Buff", "Beer", "Beef", "Bedroom", "Bedlam", "Become", "Because", "Beaver", "Beauty", "Build", "Beautiful", "Beard", "Bear", "Bead", "Builder", "Beacon", "Beach", "Bawdy", "Battling", "Battlefield", "Built", "Battle", "Battery", "Bathroom", "Bass", "Basketball", "Basket", "Basis", "Bullish", "Basically", "Basic", "Bashful", "Based", "Bullseye", "Baseball", "Base", "Barrier", "Barrel", "Barrage", "Baritone", "Buoyancy", "Barely", "Banter", "Bankruptcy", "Bankrupt", "Banking", "Busily", "Banker", "Bank", "Bang", "Bandwidth", "Bandage", "Band", "Banana", "Banal", "Bamboo", "Businesslike", "Ballot", "Balloon", "Ball", "Baleful", "Busting", "Balcony", "Balanced", "Balance", "Bake", "Bailout", "Bail", "Baggage", "Bag", "Bustling", "Badly", "Badger", "Bad", "Bacterium", "Bacteria", "Backyard", "Busy", "Backward", "Backup", "Backpack", "Buxom", "Backlog", "Backlash", "Backing", "Backhand", "Buy", "Background", "Backed", "Backdrop", "Backboard", "Back", "Bachelor", "Baby", "Babble", "Bacon", "Bait", "Bald", "Ballet", "Ballsy", "Ban", "Banish", "Bar", "Bare", "Bark", "Basin", "Bat", "Bathtub", "Bay", "Bean", "Beat", "Bin", "Beats", "Bind", "Beautification", "Biography", "Beautified", "Biology", "Beautify", "Biscuit", "Beckoned", "Bishop", "Beckoning", "Bitch", "Beckons", "Bite", "Bed", "Bits", "Bee", "Bitter", "Beg", "Boldly", "Behead", "Boldness", "Being", "Bolt", "Beingness", "Bonanza", "Believably", "Bonhomie", "Believer", "Bonjour", "Belonging", "Bonuses", "Bench", "Borrow", "Bend", "Bother", "Benefactress", "Bottom", "Beneficently", "Boundless", "Beneficially", "Bounteous", "Beneficiary", "Bounteously", "Benefits", "Bounteousness", "Benevolently", "Benignly", "Berry", "Bet", "Betray", "Bible", "Blonde", "Bloodshed", "Bow", "Blooming", "Bowel", "Blossoming", "Boy", "Blue jean", "Bracket", "Branch", "Blackmail", "Brag", "Blade", "Braid", "Brand", "Brainstorm", "Black", "Bland", "Bravely", "Break", "Blank", "Breakdown", "Bleed", "Breakfast", "Blessed", "Breakthroughs", "Blessedly", "Breast", "Blissfulness", "Breathe", "Bride", "Breathlessness", "Brighter", "Breathtakingly", "Brightest", "Breed", "Brightly", "Breeziness", "Brightness", "Brilliantly", "Brilliances", "Bring", "Brink", "Broadcast", "Brown", "Bucket", "Bud", "Budge", "Broken", "Budget", "Bronze", "Buffet", "Brother", "Buirdly", "Bulletin", "Brotherly", "Bullishness", "Bruised", "Bundle", "Brittle", "Buoyantly", "Batty", "Breakable", "Burial", "Brash", "Burn", "Brackish", "Burst", "Bowed", "Bury", "Bovine", "Bus", "Both", "Business", "Bossy", "Buttocks", "Boring", "Buzzing", "Bored", "Buttery", "Boorish", "Barren", "Bursal", "Bookish", "Burlesque", "Bony", "Barbarous", "Burdensome", "Bonkers", "Bumpy", "Boiling", "Bulky", "Baggy", "Blond", "Bulimic", "Bleak", "Bulbar", "Blaring", "Biloculate", "Bewitched", "Baffling", "Billowy", "Bewildered", "Bicameral", "Bacterial", "Belligerent", "Biannual", "Babyish", "Belated"]],
+		]);
+
+		const vocabMeaningMap = new Map([
+		['ENA', ["放棄", "能力", "能夠", "流產", "關於", "以上", "國外", "缺席", "絕對", "絕對", "吸收", "濫用", "學術的", "接受", "訪問", "事故", "陪", "完成", "根據", "帳戶", "準確", "控告", "實現", "成就", "酸", "確認", "獲得", "跨越", "法案", "行動", "活性", "活動家", "活動", "演員", "演員", "實際", "其實", "廣告", "適應", "加", "加成", "額外", "地址", "充足", "調整", "調整", "行政", "管理員", "欣賞", "入場", "承認", "青少年", "採用", "成人", "提前", "高級", "優點", "冒險", "廣告", "忠告", "勸告", "顧問", "主張", "事務", "影響", "買得起", "害怕", "非洲人", "非裔美國人", "後", "下午", "再次", "反對", "年齡", "機構", "議程", "代理人", "好鬥的", "前", "同意", "協議", "農業的", "啊", "先", "援助", "助手", "艾滋病", "目標", "空氣", "飛機", "航空公司", "飛機場", "專輯", "醇", "活", "所有", "聯盟", "允許", "盟國", "幾乎", "單獨", "沿", "已經", "也", "改變", "另類", "雖然", "總是", "上午", "驚人", "美國人", "其中", "量", "分析", "分析員", "分析", "古", "和", "憤怒", "角度", "憤怒", "動物", "週年", "宣布", "年度", "另一個", "回答", "預料", "焦慮", "任何", "任何人", "不再", "任何人", "任何東西", "無論如何", "任何地方", "分開", "公寓", "明顯的", "顯然地", "上訴", "出現", "出現", "蘋果", "應用", "應用", "委", "約定", "欣賞", "方法", "適當", "認可", "批准", "約", "阿拉伯", "建築師", "區", "爭論", "論據", "出現", "臂", "武裝的", "軍隊", "周圍", "安排", "安排", "逮捕", "到達", "到達", "藝術", "文章", "藝術家", "藝術的", "如", "亞洲人", "在旁邊", "問", "睡著了", "方面", "突擊", "斷言", "評估", "評定", "資產", "分配", "分配", "助攻", "幫助", "助理", "關聯", "協會", "承擔", "假設", "保證", "在", "運動員", "運動的", "大氣層", "連接", "攻擊", "嘗試", "出席", "注意", "態度", "律師", "吸引", "有魅力", "屬性", "聽眾", "作者", "權威", "汽車", "有空", "平均", "避免", "獎", "知道的", "意識", "遠", "可怕"]],
+		['ENB', ["旁白","寶貝","過去的","骨幹","按鈕","支持者","蝴蝶","壞蛋","忙碌","壞蛋","襯套","香脂","魁梧","芳香","官僚","香脂","浮力","巴姆","子彈","敲打","推土機","可銀行","電燈泡","橫幅","建造","宴會","怪物","萬歲","水牛","便宜貨","田園風光","男爵","氣泡","重擊","粗暴","曬","比迪","刷子","光束","瀏覽器","喜氣洋洋","西蘭花","比米甚","拉刀","泂","輕快地","幸福的","輕快","美化","傑出的","八福","明亮的","博庫普","橋","美女","磚","美麗的","簡潔","漂亮地","驚險","突破","精美","麵包","成為","違反","招手","布拉武拉","變得","布拉沃","迷惑","勇敢","貝德克","勇敢的","基岩","揮舞","仡","制動","合適","聰明的","貝格特","智囊","迷人的","腦","表現","布拉格特","看哪","手鐲","珠光寶氣","碗","可信的","賞金","祝福","瓶子","恩惠","出生","恩人","邊界","有益的","引導","仁慈的","促進","仁","繁榮","善良的","書店","彎曲","書架","遺贈","書","暢銷書","獎金","賜給","邦尼","賜予者","骨","改善","紐帶","妖嬈","爆炸案","大佬","轟炸機","比茹","誇誇其談","捆綁","炸彈","答對了","支持者","親生物","大膽的","無可指責","喧鬧的","熾烈","虛假","熾熱地","保鏢","致盲","身體","幸福地","山貓","快活","船","愉快地","木板","快樂的","藍莓","藍色的","大片","吹","盛開","開花","誇","血腥","吹噓","臉紅","膽大包天","血液","博福","博客","波西米亞風情","阻塞","喧鬧","被封鎖","邦澤","堵塞","誇誇其談","幸福的","蓬勃發展","極樂","恩賜","瞎的","助推器","祝福","助推主義","保佑","贓物","混合","懷","缺陷","老闆","昏昏欲睡","買","火焰","彈跳","明目張膽","有彈性的","爆破","邊界","爆破","豐富","褻瀆神明","慷慨地","布拉斯","花束","毯子","拳擊手","諂","男朋友","責備","男孩子氣","黑板","支撐","離奇","最聰明的","比特幣","頭腦風暴","生日","出生","黃銅","鳥","武力","仿生","膂力","生物識別","粗壯的","億萬富翁","厚顏無恥","十億","養家糊口的人","計費","呼吸","賬單","微風","自行車","微風輕拂","大的","比格特","簡短的","最大","提亮","大","布里爾","藏書家","輝煌","參考書目","充滿","超過","布里奧","之間","輕快","更好的","廣闊","貝塔","最好的","擴大","污跡","圍攻","狂暴","失去","心胸寬廣","喪親","斥責","遺贈","良性","仁慈","冒泡","益處","有利","本篤會","下面","起泡","基準","腰帶","以下","心愛","屬於","腹部","哥們","鐘","相信","信仰","圍攻者","在後面","遺囑","萌芽","行為","代表","吸引","怨恨","開始","開始","夥伴","糊塗","交朋友","前","甲蟲","淺黃色","啤酒","牛肉","臥室","瘋人院","變得","因為","海狸","美麗","建造","美麗的","鬍鬚","熊","珠子","建造者","燈塔","海灘","淫蕩","戰鬥","戰場","內置","戰鬥","電池","浴室","低音","籃球","籃子","基礎","看漲","基本上","基本的","害羞","基於","靶心","棒球","根據","障礙","桶","彈幕","男中音","浮力","僅僅","嘲笑","破產","破產","銀行業","忙碌的","銀行家","銀行","砰","帶寬","繃帶","樂隊","香蕉","平庸","竹子","商務人士","選票","氣球","球","惡意的","破壞","陽台","均衡","平衡","烤","救助","保釋","行李","包","繁華","嚴重","獾","壞的","細菌","細菌","後院","忙碌的","落後","備份","背包","豐滿","積壓","反彈","後盾","反手","買","背景","支持","背景","籃板","後退","學士","嬰兒","潺潺","培根","餌","禿","芭蕾舞","鮑爾西","禁止","放逐","酒吧","裸","吠","盆地","蝙蝠","浴缸","灣","豆","打","垃圾桶","節拍","綁定","美化","傳","美化","生物學","美化","餅乾","招手","主教","招手","婊子","招手","咬","床","位","蜜蜂","苦的","求","大膽地","斬首","膽量","存在","螺栓","存在性","富礦","令人信服","好朋友","信徒","你好","歸屬感","獎金","長椅","借","彎曲","打擾","恩人","底部","仁慈地","無邊無際","有益地","慷慨的","受益人","慷慨地","好處","慷慨","仁慈地","善意地","漿果","賭注","背叛","聖經","金發女郎","流血事件","弓","綻放","腸","綻放","男生","藍色牛仔褲","括號","分支","勒索","吹牛","刀","編織","牌","頭腦風暴","黑色的","平淡無奇","勇敢地","休息","空白的","分解","流血","早餐","祝福","突破","幸運的是","胸部","幸福","呼吸","新娘","氣喘吁籲","更亮","令人嘆為觀止","最亮的","品種","明亮地","輕快","亮度","精彩紛呈","輝煌","帶來","邊緣","播送","棕色的","桶","芽","預算","破碎的","預算","青銅","自助餐","兄弟","笨拙地","公告","兄弟般的","看漲","瘀傷","捆","脆","興高采烈","瘋狂","易碎","葬禮","傲慢","燒傷","鹹味","爆裂","鞠躬","埋葬","牛","公共汽車","兩個都","商業","專橫","臀部","無聊的","嗡嗡聲","無聊的","黃油","粗野","荒蕪","法氏囊","書呆子","滑稽表演","骨","野蠻","繁重的","瘋子","起疙瘩的","沸騰","笨重","寬鬆的","金發","暴食症","蒼涼","球莖","響亮","雙室","著迷了","莫名其妙","波濤洶湧","不知所措","兩院制","細菌","好戰的","一年兩次","幼稚","遲來的"]],
+		]);
+
+		var correctOptionId, vocabIdx;
 		var questionCount=0, correctCount=0, incorrectCount=0;
 		var totalScore=0;
 
@@ -53,29 +65,14 @@
 		var voices = speechSynthesis.getVoices();
 
 		var courseId;
-		var minNum1 = 10; /* 10 mean 2 digits */
-		var minNum2 = 1; /* 10 mean 2 digits */
-		var formula;
-		var formulaOper = "+";
-
-		var formulaOper2 = "";
-		var minNum3 = 1; /* 10 mean 2 digits */
-		var formulaOper2before = true;
 
 		var ansMap = new Map();
-
-		const formulaOperMap = new Map([
-		['add', '+'],
-		['minus', '-'],
-		['multiply', '*'],
-		['divide', '/'],
-		]);
 
 
 		async function speakWord(btnTxt) {
 			Promise.allSettled([
 				//new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-CN"), 0)),
-				new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "en-US"), 0)),
+				new Promise((resolve) => setTimeout(() => speakWordWithLang(btnTxt, "zh-HK"), 0)),
 				new Promise((resolve) => setTimeout(() => $('#correctModalId').modal('hide'), 2500)),
 				new Promise((resolve) => setTimeout(() => $('#incorrectModalId').modal('hide'), 2500))
 				])
@@ -100,9 +97,8 @@
 		};
 
 		function assignAns(calAns, correctOption, optionIdx) {
-
 			if (correctOption == optionIdx) {
-				$("#ans"+optionIdx).text(calAns);
+				$("#ans"+optionIdx).text(vocabMeaning[vocabIdx]);
 				correctOptionId = "ans"+optionIdx;
 				
 				ansMap.set(calAns, optionIdx);
@@ -111,15 +107,9 @@
 				var isDuplicatedAns = true;
 				
 				while (isDuplicatedAns) {
-					var wrongAns = "";
-					if (calAns.toString().indexOf("...") == -1) {
-						wrongAns = Math.floor(Math.random() * 10 + 1 + calAns);
-						
-					}
-					else {
-						wrongAns = Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[0]) + "..." +Math.floor(Math.random() * 10 +1 + calAns.toString().split("...")[1]);		
+					var vocabMeaningIdx = Math.floor(Math.random() * vocabMeaning.length);
+					var wrongAns = vocabMeaning[vocabMeaningIdx];
 
-					}
 					$("#ans"+optionIdx).text(wrongAns);
 
 					if (!ansMap.has(wrongAns)) {
@@ -137,227 +127,18 @@
 			questionCount++;
 
 //			calAns = Math.floor(Math.random() * vocab.length);
+			vocabIdx = Math.floor(Math.random() * vocab.length);
 
-			var firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
+			formula = vocab[vocabIdx];
 
-			var secondNum = Math.floor((Math.random() * minNum2 * 9) + minNum2);
-			
+			$("#vocab_question").text(formula);
 
-
-
-			if (formulaOper==="/") {
-				// Avoid divide by zero
-				secondNum++;
-
-				// Avoid first num > second num	
-				if (secondNum > firstNum) {
-					firstNum = firstNum + 1;
-				}
-			}
-
-			else if (formulaOper==="-") {
-
-				// Avoid first num > second num	
-				if (firstNum == 0 || firstNum == "0") {
-					secondNum = 0;
-				}
-				else if (secondNum > firstNum) {
-					secondNum = firstNum;
-				}
-			}
-
-			if (formulaOper==="/" || formulaOper2==="/") {
-				var isBadNumForComplexFormula = true;
-				
-				while (isBadNumForComplexFormula) {
-					
-					if (firstNum==0) {
-						firstNum = Math.floor((Math.random() * minNum1 * 9) + minNum1);
-					} 
-
-					if (secondNum==0) {
-						secondNum = Math.floor((Math.random() * minNum1 * 9) + minNum2);
-					} 
-					
-					if (firstNum!=0 && secondNum!=0) {
-						isBadNumForComplexFormula = false;
-					}
-				}
-			}
-
-			
-			formula = firstNum + " " + formulaOper + " " + secondNum;
-			
-			
-			var calculatedAns;
-
-			switch(formulaOper) {
-				case "-":
-					calculatedAns = firstNum - secondNum;
-					break;
-				case "+":
-					calculatedAns = firstNum + secondNum;
-					break;
-					
-				case "*":
-				case "x":
-				case "X":		 
-					formula = firstNum + " x " + secondNum;
-					calculatedAns = firstNum * secondNum;
-					break;
-
-				case "/":
-					console.log("firstNum:"+firstNum);
-					console.log("secondNum:"+secondNum);					
-					var remainder = firstNum % secondNum;
-					console.log("remainder:"+remainder);	
-					if (remainder!=0) {
-						if (!formulaOper2) {
-							calculatedAns = (firstNum-remainder)/secondNum +"..."+ firstNum % secondNum;
-							console.log("1calculatedAns:"+calculatedAns);	
-						}
-						else {
-							firstNum = firstNum - remainder;
-							calculatedAns = firstNum/secondNum;
-							console.log("2calculatedAns:"+calculatedAns);	
-						}
-					}
-					else {
-						calculatedAns = (firstNum-remainder)/secondNum;
-						console.log("3calculatedAns:"+calculatedAns);	
-					}
-
-					console.log("rfirstNum:"+firstNum);
-					console.log("rsecondNum:"+secondNum);					
-					console.log("rremainder:"+remainder);	
-					console.log("rcalculatedAns:"+calculatedAns);	
-
-					formula = firstNum + " " + "&divide;" + " " + secondNum;
-					break;			
-				default:
-					calculatedAns = 0;
-			} 
-
-		//	formula += calculatedAns;
-			// has 2nd operator
-			if (formulaOper2) {
-				var thirdNum = Math.floor((Math.random() * minNum3 * 9) + minNum3);
-
-				if (formulaOper2==="/") {
-					// Avoid divide by zero
-					thirdNum++;
-
-				}
-
-				if (Math.random() < 0.5) {
-					formulaOper2before = true;					
-				}
-				else {
-					formulaOper2before = false;					
-				}
-
-				if (formulaOper2==="-" || formulaOper2==="/") {
-					if (thirdNum > calculatedAns) {
-						formulaOper2before = true;
-					}
-					else {
-						formulaOper2before = false;
-					}
-				}
-
-
-				if (formulaOper2before) {
-					formula = thirdNum + " " + formulaOper2 +  " ("+formula+")";
-				}
-				else {						
-					formula = "("+formula+") " + formulaOper2 + " " +thirdNum;
-				}
-
-				if ((formulaOper==="*" || formulaOper==="/") && formulaOper2!="/") {
-					
-					// Randomly remove () to make it more tricky
-					if (Math.random() < 0.5) {
-						formula = formula.replace("(", "");
-						formula = formula.replace(")", "");
-					}
-				}
-
-				switch(formulaOper2) {
-					case "-":
-						if (formulaOper2before) {
-							calculatedAns = thirdNum - calculatedAns;
-						}
-						else {
-							calculatedAns = calculatedAns - thirdNum;
-						}
-
-						break;
-					case "+":
-						calculatedAns = calculatedAns + thirdNum;
-						break;
-						
-					case "*":
-					case "x":
-					case "X":		 
-						formula = formula.replace("*", "x");
-						calculatedAns = calculatedAns * thirdNum;
-						break;
-
-					case "/":
-
-					console.log("2/rfirstNum:"+firstNum);
-					console.log("2/rsecondNum:"+secondNum);					
-
-					console.log("2/rthirdNum:"+thirdNum);					
-					console.log("2/rcalculatedAns:"+calculatedAns);	
-						
-
-
-
-						if (formulaOper2before) {
-							var remainder = thirdNum % calculatedAns;
-							console.log("2/rremainder:"+remainder);							
-							if (remainder!=0) {
-								calculatedAns = (thirdNum-remainder)/calculatedAns +"..."+ thirdNum % calculatedAns;
-							}
-							else {
-								calculatedAns = (thirdNum-remainder)/calculatedAns;
-							}
-						}
-						else {
-							var remainder = calculatedAns % thirdNum;
-						
-							if (remainder!=0) {
-								calculatedAns = (calculatedAns-remainder)/thirdNum +"..."+ calculatedAns % thirdNum;
-							}
-							else {
-								calculatedAns = (calculatedAns-remainder)/thirdNum;
-							}
-						}
-						console.log("22/rcalculatedAns:"+calculatedAns);	
-
-						formula = formula.replace("/", "&divide;");					
-
-						break;			
-					default:
-						calculatedAns = 0;
-				} 
-
-
-
-			}			
-
-
-			formula +=" = ?";
-
-			$("#vocab_question").html(formula);
-			
 			var correctOption = Math.floor(Math.random() * 4);
-			
+
 			ansMap = new Map();
-			
+
 			for (var i=0; i<4; i++) {
-				assignAns(calculatedAns, correctOption, i);
+				assignAns(vocabIdx, correctOption, i);
 			}
 			
 			return;
@@ -446,12 +227,9 @@
 				const urlParams = new URLSearchParams(queryString);
 
 				courseId = urlParams.get('courseId');
-				minNum1 = urlParams.get('minNum1');
-				minNum2 = urlParams.get('minNum2');	
-				minNum3 = urlParams.get('minNum3');	
-				formulaOper = formulaOperMap.get(urlParams.get('oper'));	
-				formulaOper2 = formulaOperMap.get(urlParams.get('oper2'));	
 
+				vocab = vocabMap.get(courseId);
+				vocabMeaning = vocabMeaningMap.get(courseId);
 
 				refreshQuestion('yes');
 			}
