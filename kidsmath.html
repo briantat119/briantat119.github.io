@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -244,6 +244,15 @@
 					formula = "("+formula+") " + formulaOper2 + " " +thirdNum;
 				}
 
+				if ((formulaOper==="*" || formulaOper==="/") && (formulaOper2==="+" || formulaOper2==="-")) {
+					
+					// Randomly remove () to make it more tricky
+					if (Math.random() < 0.5) {
+						formula = formula.replace("(", "");
+						formula = formula.replace(")", "");
+					}
+				}
+
 				switch(formulaOper2) {
 					case "-":
 						if (formulaOper2before) {
@@ -331,12 +340,11 @@
 						totalScore = 100;
 
 						var luckyDrawId = Math.floor(Math.random() * 5);
-						$("#luckyDrawBadge"+luckyDrawId).show();
 
 						var date = new Date();
-
 						$("#luckyDrawRefNumId"+luckyDrawId).text(courseId+luckyDrawId+String(date.getDate()).padStart(2, '0')+String(date.getHours()).padStart(2, '0')+String(date.getMinutes()).padStart(2, '0'));
 
+						$("#luckyDrawBadge"+luckyDrawId).show();
 						$('#luckyDrawModalId').modal('show');
 					}
 					else {
